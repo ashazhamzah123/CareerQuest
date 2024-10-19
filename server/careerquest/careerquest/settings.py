@@ -54,7 +54,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # Or any other domain if you host it differently
+    "http://localhost:5173",  # Or any other domain if you host it differently
 ]
 
 ROOT_URLCONF = 'careerquest.urls'
