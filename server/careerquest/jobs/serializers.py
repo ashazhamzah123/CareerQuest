@@ -4,7 +4,7 @@ from .models import User, JobListing, Application, Branch
 class BranchSerializer(serializers.ModelSerializer):
     class Meta:
         model = Branch
-        fields = ['name']
+        fields = ['id','name']
 
 class UserSerializer(serializers.ModelSerializer):
     branch = BranchSerializer()
@@ -14,7 +14,11 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['username', 'roll_number', 'branch', 'cgpa', 'is_student', 'is_admin']
 
 class JobListingSerializer(serializers.ModelSerializer):
-    eligible_branches = BranchSerializer(many=True)
+    eligible_branches = serializers.PrimaryKeyRelatedField(
+        queryset=Branch.objects.all(),
+        many = True
+    )
+    #eligible_branches = BranchSerializer(many=True)
 
     class Meta:
         model = JobListing
@@ -27,3 +31,33 @@ class ApplicationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Application
         fields = ['student', 'job', 'application_date', 'status']
+
+class RegisterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password', 'roll_number', 'branch','cgpa','is_student','is_admin')
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        user = User.objects.create_user(
+            username=validated_data['username'],
+            email=validated_data['email'],
+            roll_number=validated_data['roll_number'],
+            is_student=validated_data.get('is_student', True),
+            is_admin=validated_data.get('is_admin', False)
+        )
+        if user.is_student: #Ensuring the branch and cgpa is provided for students.
+            branch = validated_data.get('branch')
+            cgpa = validated_data.get('cgpa')
+            if not branch or not cgpa:
+                raise serializers.ValidationError("Branch and CGPA are required for students.")
+            user.branch = branch
+            user.cgpa = cgpa
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
+    
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'first_name', 'last_name']
