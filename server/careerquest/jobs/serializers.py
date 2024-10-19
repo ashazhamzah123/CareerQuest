@@ -18,7 +18,7 @@ class JobListingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = JobListing
-        fields = ['title', 'description', 'company', 'min_cgpa', 'eligible_branches', 'post_date']
+        fields = ['title', 'description', 'company', 'min_cgpa', 'eligible_branches', 'salary', 'due_date', 'post_date']
 
 class ApplicationSerializer(serializers.ModelSerializer):
     student = UserSerializer()
