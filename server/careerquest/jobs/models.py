@@ -63,7 +63,9 @@ class JobListing(models.Model):
         return self.title
 
 class Application(models.Model):
-    student = models.ForeignKey(User, on_delete=models.CASCADE)
-    job = models.ForeignKey(JobListing, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='applied_jobs')
+    job_listing = models.ForeignKey(JobListing, on_delete=models.CASCADE, related_name='applications')
     application_date = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=50, default='Pending')
+    class Meta:
+        unique_together = ('user','job_listing')
