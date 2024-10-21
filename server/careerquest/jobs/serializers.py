@@ -4,14 +4,14 @@ from .models import User, JobListing, Application, Branch
 class BranchSerializer(serializers.ModelSerializer):
     class Meta:
         model = Branch
-        fields = ['id','name']
+        fields = ['name']
 
 class UserSerializer(serializers.ModelSerializer):
     branch = BranchSerializer()
 
     class Meta:
         model = User
-        fields = ['username', 'roll_number', 'branch', 'cgpa', 'is_student', 'is_admin']
+        fields = ['username','first_name', 'roll_number', 'branch', 'cgpa', 'is_student', 'is_admin']
 
 class JobListingSerializer(serializers.ModelSerializer):
     eligible_branches = serializers.PrimaryKeyRelatedField(
@@ -35,11 +35,12 @@ class ApplicationSerializer(serializers.ModelSerializer):
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('username', 'email', 'password', 'roll_number', 'branch','cgpa','is_student','is_admin')
+        fields = ('username', 'email', 'password', 'first_name','last_name','roll_number', 'branch','cgpa','is_student','is_admin')
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
         user = User.objects.create_user(
+            first_name=validated_data['first_name'],
             username=validated_data['username'],
             email=validated_data['email'],
             roll_number=validated_data['roll_number'],

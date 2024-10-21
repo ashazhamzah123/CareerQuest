@@ -47,6 +47,26 @@ const RegisterPage = () => {
         </Typography>
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid2 container spacing={2}>
+          <Grid2 item xs={12}>
+              <TextField
+                fullWidth
+                label="First Name"
+                name="first_name"
+                variant="outlined"
+                value={formData.first_name}
+                onChange={handleChange}
+              />
+            </Grid2>
+            <Grid2 item xs={12}>
+              <TextField
+                fullWidth
+                label="Last Name"
+                name="last_name"
+                variant="outlined"
+                value={formData.last_name}
+                onChange={handleChange}
+              />
+            </Grid2>
             <Grid2 item xs={12}>
               <TextField
                 fullWidth

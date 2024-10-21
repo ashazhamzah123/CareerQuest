@@ -6,7 +6,7 @@ from django import forms
 class UserCreationForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('roll_number', 'username', 'email', 'password', 'branch', 'cgpa', 'is_student', 'is_admin')
+        fields = ('first_name','last_name','roll_number', 'username', 'email', 'password', 'branch', 'cgpa', 'is_student', 'is_admin')
 
     def clean(self):
         cleaned_data = super().clean()
