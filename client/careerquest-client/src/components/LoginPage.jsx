@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styles from "./LoginPage.module.css"
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({ username: '', password: '' });
@@ -31,26 +32,35 @@ const LoginPage = () => {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="username"
-          placeholder="Username"
-          value={formData.username}
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-        />
-        <button type="submit">Login</button>
-      </form>
+    <div >
+      <div className={styles.logincontainer}>
+      <div className={styles.logindiv}>
+          <h1>Login</h1>
+            <form onSubmit={handleSubmit}>
+              <input className={styles.login_form_input}
+                type="text"
+                name="username"
+                placeholder="Username"
+                value={formData.username}
+                onChange={handleChange}
+              />
+              <input className={styles.login_form_input}
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={formData.password}
+                onChange={handleChange}
+              />
+              <button className={styles.login_form_button} type="submit">Login</button>
+              <p>
+                Haven't Registered yet? <a href="http://localhost:5173/register">Register</a>
+              </p>
+            </form>
+        </div>
+        </div>
+
     </div>
+    
   );
 };
 
