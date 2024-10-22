@@ -73,6 +73,7 @@
   .dashboardContent {
     flex: 1;
     padding: 2rem;
+    font-family: Arial, Helvetica, sans-serif;
   }
 
   .logoutButton {
@@ -97,6 +98,71 @@
   .activeButton {
     background-color: #007bff; /* Active button background */
     color: white; /* Text color for active */
+  }
+
+  .job-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  /* Individual job card */
+  .job-card {
+    background-color: #f4f4f4;
+    padding: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 10px;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .job-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* Job title */
+  .job-card h3 {
+    margin: 0;
+    color: #333;
+    font-size: 1.5rem;
+  }
+  
+  /* Company name */
+  .company-name {
+    font-size: 1rem;
+    color: #666;
+    margin: 10px 0;
+  }
+  
+  /* Job description */
+  .job-card p {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  /* View Details button */
+  .details-button {
+    background-color: #6200ea;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .details-button:hover {
+    background-color: #4e00b6;
+  }
+  
+  /* Loading and error messages */
+  .loading, .error {
+    font-size: 1.5rem;
+    color: #555;
   }
   
   

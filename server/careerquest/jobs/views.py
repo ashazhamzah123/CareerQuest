@@ -1,5 +1,5 @@
 from rest_framework import generics, permissions, serializers, status, viewsets
-from .models import JobListing, Application
+from .models import JobListing, Application, User
 from .serializers import JobListingSerializer, ApplicationSerializer, RegisterSerializer, UserProfileSerializer, UserSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.contrib.auth.models import User
@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
+from django.contrib.auth import get_user_model
 
 class EligibleJobsView(generics.ListAPIView):
     serializer_class = JobListingSerializer
@@ -125,5 +126,15 @@ class JobDetailView(APIView):
     def get(self, request, pk):
         job = JobListing.objects.get(pk=pk)
         serializer = JobListingSerializer(job)
+        return Response(serializer.data)
+
+User = get_user_model()
+class UserDetails(APIView):
+    
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        serializer = UserSerializer(user)
         return Response(serializer.data)
 

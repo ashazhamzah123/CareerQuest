@@ -98,7 +98,7 @@ const RegisterPage = () => {
             type="number"
             name="cgpa"
             placeholder="CGPA"
-            value={formData.branch}
+            value={formData.cgpa}
             onChange={handleChange}
           />
           <button
