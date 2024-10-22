@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import styles from "./LoginPage.module.css"
+import styles from "./LoginPage.module.css";
+import { Link } from 'react-router-dom';
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({ username: '', password: '' });
@@ -53,7 +54,7 @@ const LoginPage = () => {
               />
               <button className={styles.login_form_button} type="submit">Login</button>
               <p>
-                Haven't Registered yet? <a href="http://localhost:5173/register">Register</a>
+                Haven't Registered yet? <Link to="/register">Register</Link>
               </p>
             </form>
         </div>

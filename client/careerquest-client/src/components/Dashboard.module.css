@@ -1,0 +1,102 @@
+/* Layout for the dashboard */
+.dashboardContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #333;
+    color: white;
+  }
+  
+  .navbarLeft {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbarLogo {
+    height: 40px;
+  }
+  
+  .navbarTitle {
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 10px;
+    font-size: 1.5rem;
+  }
+  
+  .profileIcon {
+    height: 30px;
+    cursor: pointer;
+  }
+  
+  .mainContent {
+    display: flex;
+    flex: 1;
+  }
+  
+  .sidebar {
+    width: 200px;
+    background-color: #f8f9fa;
+    padding: 2rem;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .sidebar ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sidebar ul li {
+    margin-bottom: 1rem;
+  }
+  
+  .sidebar ul li a {
+    text-decoration: none;
+    color: #333;
+    padding: 0.5rem;
+    display: block;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .active a,
+  .sidebar ul li a:hover {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .dashboardContent {
+    flex: 1;
+    padding: 2rem;
+  }
+
+  .logoutButton {
+    background-color: #f8f9fa; /* Same as the sidebar background */
+    color: #333; /* Same as the sidebar text */
+    padding: 0.5rem;
+    width: 100%; /* Full width */
+    border: none;
+    border-radius: 5px;
+    text-align: left;
+    font-size: 16px;
+    display: block;
+    transition: background-color 0.3s ease; /* Smooth transition */
+    cursor: pointer;
+  }
+  
+  .logoutButton:hover {
+    background-color: #007bff; /* Same hover effect */
+    color: white; /* Text color on hover */
+  }
+  
+  .activeButton {
+    background-color: #007bff; /* Active button background */
+    color: white; /* Text color for active */
+  }
+  
+  
