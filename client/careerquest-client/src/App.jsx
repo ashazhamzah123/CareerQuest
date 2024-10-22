@@ -5,6 +5,7 @@ import LoginPage from './components/LoginPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import Dashboard from './components/Dashboard'; // Example of a protected route
 import CheckApplications from './components/CheckApplications'
+import EditProfile from './components/EditProfile'
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             } 
           />
           <Route path='/check-applications' element = {<ProtectedRoute><CheckApplications/></ProtectedRoute>}/>
+          <Route path='/edit-profile' element = {<ProtectedRoute><EditProfile/></ProtectedRoute>}/>
         </Routes>
       </div>
     </Router>

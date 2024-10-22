@@ -175,3 +175,17 @@
     padding: 2rem;
     font-family: Arial, Helvetica, sans-serif;
   }
+  
+  .input{
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 1em;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #232323;
+  }
+
+  .EditContent{
+    flex: 1;
+    padding: 2rem;
+    font-family: Arial, Helvetica, sans-serif;
+  }
