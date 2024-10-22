@@ -55,7 +55,7 @@ const LoginPage = () => {
               <button className={styles.login_form_button} type="submit">Login</button>
             </form>
             <p>
-              Haven't Registered yet? <Link to="/register">Register</Link>
+              Haven't Registered yet? <Link to="/register" className={styles.link}>Register</Link>
             </p>     
         </div>
         </div>

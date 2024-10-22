@@ -1,12 +1,14 @@
+/*
 .logindiv{
+    color: #d8d8e1;
     width: 300px;
     font-family: Arial, Helvetica, sans-serif;
     padding: 20px;
-    border: 1px solid #ddd;
+    border: 1px solid #393939;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
+*/
 .loginnav{
     align-items: top;
     font-family: Arial, Helvetica, sans-serif;
@@ -14,19 +16,22 @@
     padding: 20px;
     box-shadow: 0 0px 0px 5px rgba(0, 0, 0, 0.1);
 }
-
+/*
 .logincontainer{
+    background-color: #1a1a1a;
     display: flex;
-    justify-content:center;   /* Center horizontally */
-    align-items:center;       /* Center vertically */
+    justify-content:center;
+    align-items:center;       
     height: 100vh;
 }
-
+*/
 .login_form_input{
     width: 90%;
     margin-bottom: 15px;
     padding: 10px;
     font-size: 1em;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ebebeb;
   }
   
 .login_form_button{
@@ -35,6 +40,67 @@
     background-color: #000;
     color: #fff;
     border: none;
+    font-size: 1em;
     border-radius: 5px;
     cursor: pointer;
 }
+
+.login_form_button:hover {
+    background-color: #777;
+}
+
+.link{
+    text-decoration: none;
+    color: #d8d8e1;
+}
+
+.link:hover{
+    color: #c285ff;
+}
+
+.logincontainer {
+    background: linear-gradient(45deg, #000000, #2b0a79, #5b0693, #560bad, #240046);
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;  /* 15s animation loop */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+}
+  
+@keyframes gradientAnimation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+}
+  
+.logindiv {
+    position: relative;
+    z-index: 2;
+    color: #ebebeb;
+    width: 300px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.1); /* Transparent form background */
+}
+.registercontainer {
+    background: linear-gradient(45deg, #820101, #5f0e2a, #250f67, #0d535e);
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite; 
+    background-color: #1a1a1a;
+    display: flex;
+    justify-content: center;   /* Center horizontally */
+    align-items: center;       /* Center vertically */
+    height: 100vh;
+}
+
+/*background: linear-gradient(45deg, #ff6b6b, #f06595, #845ef7, #22b8cf);*/
