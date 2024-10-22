@@ -129,12 +129,33 @@ class JobDetailView(APIView):
         return Response(serializer.data)
 
 User = get_user_model()
+
 class UserDetails(APIView):
-    
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
         user = request.user
         serializer = UserSerializer(user)
         return Response(serializer.data)
+    
+
+class ApplyJobView(APIView):
+    permission_classes = [IsAuthenticated]  # Only authenticated users can apply for jobs
+
+    def post(self, request, job_id):
+        try:
+            job = JobListing.objects.get(id=job_id)
+            student = request.user
+
+            # Check if the user has already applied for this job
+            if Application.objects.filter(student=student, job=job).exists():
+                return Response({'detail': 'You have already applied for this job.'}, status=status.HTTP_400_BAD_REQUEST)
+
+            # Create a new application
+            Application.objects.create(student=student, job=job)
+
+            return Response({'detail': 'Application successful!'}, status=status.HTTP_201_CREATED)
+
+        except JobListing.DoesNotExist:
+            return Response({'detail': 'Job not found.'}, status=status.HTTP_404_NOT_FOUND)
 

@@ -158,6 +158,11 @@
   .details-button:hover {
     background-color: #4e00b6;
   }
+
+  .details-button:disabled {
+    background-color: grey;
+    cursor: not-allowed;  /* Prevents the pointer cursor */
+  }
   
   /* Loading and error messages */
   .loading, .error {
