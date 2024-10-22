@@ -53,10 +53,10 @@ const LoginPage = () => {
                 onChange={handleChange}
               />
               <button className={styles.login_form_button} type="submit">Login</button>
-              <p>
-                Haven't Registered yet? <Link to="/register">Register</Link>
-              </p>
             </form>
+            <p>
+              Haven't Registered yet? <Link to="/register">Register</Link>
+            </p>     
         </div>
         </div>
 
