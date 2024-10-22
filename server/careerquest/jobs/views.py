@@ -98,9 +98,10 @@ class AppliedJobsView(APIView): #API to show jobs a student has applied for
 
     def get(self, request):
         user = request.user
-        applied_jobs = user.applied_jobs.all()
-        job_listings=[job.job_listing for job in applied_jobs]
-        serializer = JobListingSerializer(job_listings, many=True)
+        applied_jobs = Application.objects.filter(student = user)
+        if not applied_jobs.exists():
+            return Response([], status=status.HTTP_200_OK) 
+        serializer = ApplicationSerializer(applied_jobs, many=True)
         return Response(serializer.data)
 
 class JobApplicantsView(APIView): #API to show all students that applied for a job

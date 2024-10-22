@@ -4,6 +4,7 @@ import RegisterPage from './components/RegisterPage';
 import LoginPage from './components/LoginPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import Dashboard from './components/Dashboard'; // Example of a protected route
+import CheckApplications from './components/CheckApplications'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
               </ProtectedRoute>
             } 
           />
+          <Route path='/check-applications' element = {<ProtectedRoute><CheckApplications/></ProtectedRoute>}/>
         </Routes>
       </div>
     </Router>
