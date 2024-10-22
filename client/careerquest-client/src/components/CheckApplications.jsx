@@ -11,10 +11,8 @@ const CheckApplications = () => {
     const [Appliedjobs, setAppliedJobs] = useState([]);
 
     const handleLogout = () => {
-        const appliedJobsKey = `appliedJobs_${userDetails.id}`;
         localStorage.removeItem('acess_token');
         localStorage.removeItem('refresh_token');
-        localStorage.removeItem(appliedJobsKey);
 
         navigate("/Login");
   }
