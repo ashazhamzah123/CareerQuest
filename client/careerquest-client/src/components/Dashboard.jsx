@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styles from './Dashboard.module.css'; // Import CSS module
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const DashboardPage = () => {
   const backend_url = "http://127.0.0.1:8000/api";
@@ -172,9 +173,11 @@ const DashboardPage = () => {
               <Link to="/check-applications">Check Applications</Link>
             </li>
             <li>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
                 <button onClick={handleLogout} className={styles.logoutButton} type="submit">
-                    Logout
+                  Logout
                 </button>
+              </div>
             </li>
           </ul>
         </aside>
@@ -189,22 +192,24 @@ const DashboardPage = () => {
                     {jobs.map((job) => (
                       <div className={styles['job-card']} key={job.id}>
                       <h3>{job.title}</h3>
-                      <p className={styles['company-name']}>{job.company}</p>
-                      <p>{job.description}</p>
+                      <p className={styles['company-name']}>- {job.company}</p>
+                      <p>📅 {job.due_date}</p>
+                      <p>📍 {job.location}</p>
+                      <div style={{ display: 'flex', gap: '10px' }}>
                       <button
                         className={styles['details-button']}
                         onClick={() => (window.location.href = `/jobs/${job.id}`)} // Assuming job details have their own page
                       >
                       View Details
                       </button>
-                      <p></p>
                       <button
-                        className={styles['details-button']}
+                        className={styles['apply-button']}
                         onClick={() => applyToJob(job.id)}
                         disabled={appliedJobs.includes(job.id)} // Disable button if already applied
                       >
                           {appliedJobs.includes(job.id) ? 'Applied' : 'Apply'}
                       </button>
+                      </div>
                       </div>
                     ))}
                 </div>

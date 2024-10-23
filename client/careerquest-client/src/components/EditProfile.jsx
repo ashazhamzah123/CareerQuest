@@ -123,7 +123,7 @@ const EditProfile = () => {
             onChange={handleChange}
           />
           <input className={styles.input}
-            type="text"
+            type="password"
             name="password"
             placeholder="Password"
             value={formData.password}

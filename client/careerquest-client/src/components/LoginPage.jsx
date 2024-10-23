@@ -33,9 +33,21 @@ const LoginPage = () => {
   };
 
   return (
-    <div >
+    <div className={styles.logincontainer}>
       <div className={styles.logincontainer}>
+        {/*Nav bar */}
+        <nav className={styles.navbar}>
+        <div className={styles.navbarLeft}>
+          {/*<img src="/path-to-your-logo" alt="logo" className={styles.navbarLogo} />*/}
+          <h1 className={styles.navbarTitle}>CareerQuest</h1>
+        </div>
+        <div className={styles.navbarRight}>
+          <img src="/path-to-profile-icon" alt="Profile" className={styles.profileIcon} />
+        </div>
+      </nav>
+      {/*login window*/}
       <div className={styles.logindiv}>
+        <div className={styles.logincard}>
           <h1>Login</h1>
             <form onSubmit={handleSubmit}>
               <input className={styles.login_form_input}
@@ -55,8 +67,9 @@ const LoginPage = () => {
               <button className={styles.login_form_button} type="submit">Login</button>
             </form>
             <p>
-              Haven't Registered yet? <Link to="/register" className={styles.link}>Register</Link>
+              Haven't Registered yet? <Link to="/register" className={styles.link}>Create Account</Link>
             </p>     
+            </div>
         </div>
         </div>
 

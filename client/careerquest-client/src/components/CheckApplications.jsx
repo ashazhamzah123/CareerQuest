@@ -108,9 +108,10 @@ const CheckApplications = () => {
                     {Appliedjobs.map((Appliedjob) => (
                       <div className={styles['job-card']} key={Appliedjob.job.id}>
                       <h3>{Appliedjob.job.title}</h3>
-                      <p className={styles['company-name']}>{Appliedjob.job.company}</p>
-                      <p>{Appliedjob.job.description}</p>
-                      <p className={styles['company-name']}>Rs {Appliedjob.job.salary/100000} LPA</p>
+                      <p className={styles['company-name']}>- {Appliedjob.job.company}</p>
+                      <p>📅 {Appliedjob.job.due_date}</p>
+                      <p>📍 {Appliedjob.job.location}</p>
+                      <p>Rs {Appliedjob.job.salary/100000} LPA</p>
                       <button
                         className={styles['details-button']}
                         onClick={() => (window.location.href = `/jobs/${job.id}`)} // Assuming job details have their own page

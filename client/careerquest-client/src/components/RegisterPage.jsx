@@ -41,10 +41,22 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className={styles.registercontainer}>
-      <div className={styles.logindiv}>
+    <div className={styles.loginContainer}>
+        <div className={styles.registercontainer}>
+          {/*Nav bar */}
+          <nav className={styles.navbar}>
+            <div className={styles.navbarLeft}>
+              {/*<img src="/path-to-your-logo" alt="logo" className={styles.navbarLogo} />*/}
+              <h1 className={styles.navbarTitle}>CareerQuest</h1>
+            </div>
+            <div className={styles.navbarRight}>
+              <img src="/path-to-profile-icon" alt="Profile" className={styles.profileIcon} />
+            </div>
+          </nav>
+      <div className={styles.registerdiv}>
+      <div className={styles.logincard}>
         <h1>Register</h1>
-        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+        <form onSubmit={handleSubmit}>
           <input className={styles.login_form_input}
             type="text"
             name="first_name"
@@ -74,7 +86,7 @@ const RegisterPage = () => {
             onChange={handleChange}
           />
           <input className={styles.login_form_input}
-            type="text"
+            type="password"
             name="password"
             placeholder="Password"
             value={formData.password}
@@ -111,8 +123,10 @@ const RegisterPage = () => {
             Register
           </button>
           <p>Already Have an account? <Link to='/login' className={styles.link}>Login</Link></p>
-        </Box>
+        </form>
+        </div>
       </div>
+    </div>
     </div>
   );
 };

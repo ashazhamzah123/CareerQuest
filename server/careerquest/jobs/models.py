@@ -52,10 +52,11 @@ class JobListing(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     company = models.CharField(max_length=255)
+    location = models.CharField(max_length=255)
     min_cgpa = models.DecimalField(max_digits=4, decimal_places=2)
     eligible_branches = models.ManyToManyField(Branch)
     salary = models.DecimalField(max_digits=10, decimal_places= 2, default=3000000)
-    due_date = models.DateField(default=datetime.date.today)
+    due_date = models.DateField()
     posted_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='jobs_posted', null=True, blank= True)
     post_date = models.DateTimeField(auto_now_add=True)
 

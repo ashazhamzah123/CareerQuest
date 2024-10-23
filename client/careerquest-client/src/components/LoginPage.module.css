@@ -9,13 +9,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 */
-.loginnav{
-    align-items: top;
-    font-family: Arial, Helvetica, sans-serif;
-    /*color:rgb(201, 201, 201);*/
-    padding: 20px;
-    box-shadow: 0 0px 0px 5px rgba(0, 0, 0, 0.1);
-}
+
 /*
 .logincontainer{
     background-color: #1a1a1a;
@@ -25,6 +19,37 @@
     height: 100vh;
 }
 */
+.loginContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+  }
+  
+  .navbarLeft {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbarLogo {
+    height: 40px;
+    cursor: pointer;
+  }
+  
+  .navbarTitle {
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 10px;
+    font-size: 1.5rem;
+  }
 .login_form_input{
     width: 90%;
     margin-bottom: 15px;
@@ -62,10 +87,8 @@
     background: linear-gradient(45deg, #000000, #2b0a79, #5b0693, #560bad, #240046);
     background-size: 400% 400%;
     animation: gradientAnimation 15s ease infinite;  /* 15s animation loop */
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: 100vh;
+    
     position: relative;
 }
   
@@ -80,9 +103,15 @@
       background-position: 0% 50%;
     }
 }
-  
-.logindiv {
-    position: relative;
+
+.logindiv{
+    flex: 1;
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center;
+    margin-top: 150px;
+}
+.logincard {
     z-index: 2;
     color: #ebebeb;
     width: 300px;
@@ -97,10 +126,15 @@
     background-size: 400% 400%;
     animation: gradientAnimation 15s ease infinite; 
     background-color: #1a1a1a;
-    display: flex;
-    justify-content: center;   /* Center horizontally */
-    align-items: center;       /* Center vertically */
+     /* Center vertically */
     height: 100vh;
+}
+.registerdiv{
+    flex: 1;
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center;
+    margin-top: 50px;
 }
 
 /*background: linear-gradient(45deg, #ff6b6b, #f06595, #845ef7, #22b8cf);*/
