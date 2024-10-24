@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 import datetime
-
+#marking my territory hi
 class UserManager(BaseUserManager):
     def create_user(self, roll_number, username, email, password=None, branch=None, cgpa=None, **extra_fields):
         if not email:
