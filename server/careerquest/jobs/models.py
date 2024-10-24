@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 import datetime
+from django.core.exceptions import ValidationError
 
 class UserManager(BaseUserManager):
     def create_user(self, roll_number, username, email, password=None, branch=None, cgpa=None, **extra_fields):
@@ -42,11 +43,21 @@ class Branch(models.Model):
         return self.name
 
 class User(AbstractUser):
-    roll_number = models.CharField(max_length=15, unique=True)
+    roll_number = models.CharField(max_length=10, unique=True, null=True, blank=True)
     branch = models.ForeignKey(Branch, on_delete=models.CASCADE, null=True, blank=True)
     cgpa = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)
     is_student = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+    def clean(self):
+        # Ensure students have a roll number
+        if not self.is_admin and not self.roll_number:
+            raise ValidationError("Roll number is required for students.")
+        # Ensure admins do not have a roll number
+        if self.is_admin and self.roll_number:
+            raise ValidationError("Admins should not have a roll number.")
+
+    def __str__(self):
+        return self.username
 
 class JobListing(models.Model):
     title = models.CharField(max_length=255)

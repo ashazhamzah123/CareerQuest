@@ -32,7 +32,7 @@ class ApplyJobView(generics.CreateAPIView):
 class RegisterView(APIView):
     permission_classes = [AllowAny]
     def post(self, request):
-        serializer = RegisterSerializer(data=request.data)
+        serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
             refresh = RefreshToken.for_user(user)

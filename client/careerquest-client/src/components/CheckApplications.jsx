@@ -85,11 +85,11 @@ const CheckApplications = () => {
         {/* Sidebar */}
         <aside className={styles.sidebar}>
           <ul>
-            <li className={location.pathname === '/dashboard' ? styles.active : ''}>
-              <Link to="/dashboard">Dashboard</Link>
+            <li className={location.pathname === '/jobs' ? styles.active : ''}>
+              <Link to="/jobs">Job Listing</Link>
             </li>
-            <li className={location.pathname === '/edit-profile' ? styles.active : ''}>
-              <Link to="/edit-profile">Edit Profile</Link>
+            <li className={location.pathname === '/profile' ? styles.active : ''}>
+              <Link to="/profile">Profile</Link>
             </li>
             <li className={location.pathname === '/check-applications' ? styles.active : ''}>
               <Link to="/check-applications">Check Applications</Link>

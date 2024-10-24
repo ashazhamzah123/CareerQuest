@@ -7,11 +7,44 @@ class BranchSerializer(serializers.ModelSerializer):
         fields = ['name']
 
 class UserSerializer(serializers.ModelSerializer):
-    branch = BranchSerializer()
+    branch = BranchSerializer(required=False)  # Make branch optional since admins don't need it
 
     class Meta:
         model = User
-        fields = ['username','first_name', 'roll_number', 'branch', 'cgpa', 'is_student', 'is_admin']
+        fields = ['username', 'first_name', 'password','roll_number', 'branch', 'cgpa', 'is_student', 'is_admin']
+
+    def validate(self, data):
+        # If the user is a student, ensure roll_number and branch are provided
+        if data.get('is_student'):
+            if not data.get('roll_number'):
+                raise serializers.ValidationError({"roll_number": "Roll number is required for students."})
+            if not data.get('branch'):
+                raise serializers.ValidationError({"branch": "Branch is required for students."})
+        
+        # If the user is an admin, roll_number and branch should not be provided
+        if data.get('is_admin'):
+            data.pop('roll_number', None)  # Remove roll_number if it's present for admins
+            data.pop('branch', None)  # Remove branch if it's present for admins
+        
+        return data
+
+    def create(self, validated_data):
+        # Extract branch data separately, if it exists
+        branch_data = validated_data.pop('branch', None)
+        
+        # Create the user
+        user = User.objects.create(**validated_data)
+
+        # If the user is a student and branch is provided, set the branch
+        if validated_data.get('is_student') and branch_data:
+            branch = Branch.objects.get(id=branch_data['id'])
+            user.branch = branch
+        
+        user.set_password(validated_data['password'])  # Set password securely
+        user.save()
+
+        return user
+
 
 class JobListingSerializer(serializers.ModelSerializer):
     eligible_branches = serializers.PrimaryKeyRelatedField(
@@ -57,6 +90,45 @@ class RegisterSerializer(serializers.ModelSerializer):
         user.set_password(validated_data['password'])
         user.save()
         return user
+'''
+    class Meta:
+        model = User
+        fields = ['username', 'first_name', 'roll_number', 'branch', 'cgpa', 'is_student', 'is_admin']
+
+    def validate(self, data):
+        # If the user is a student, ensure roll_number and branch are provided
+        if data.get('is_student'):
+            if not data.get('roll_number'):
+                raise serializers.ValidationError({"roll_number": "Roll number is required for students."})
+            if not data.get('branch'):
+                raise serializers.ValidationError({"branch": "Branch is required for students."})
+        
+        # If the user is an admin, roll_number and branch should not be provided
+        if data.get('is_admin'):
+            data.pop('roll_number', None)  # Remove roll_number if it's present for admins
+            data.pop('branch', None)  # Remove branch if it's present for admins
+        
+        return data
+
+    def create(self, validated_data):
+        # Extract branch data separately, if it exists
+        branch_data = validated_data.pop('branch', None)
+        
+        # Create the user
+        user = User.objects.create(**validated_data)
+
+        # If the user is a student and branch is provided, set the branch
+        if validated_data.get('is_student') and branch_data:
+            branch = Branch.objects.get(id=branch_data['id'])
+            user.branch = branch
+        
+        user.set_password(validated_data['password'])  # Set password securely
+        user.save()
+
+        return user
+'''
+
+        
     
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:

@@ -163,28 +163,25 @@ const DashboardPage = () => {
         {/* Sidebar */}
         <aside className={styles.sidebar}>
           <ul>
-            <li className={location.pathname === '/dashboard' ? styles.active : ''}>
-              <Link to="/dashboard">Dashboard</Link>
+            <li className={location.pathname === '/jobs' ? styles.active : ''}>
+              <Link to="/jobs">Job Listing</Link>
             </li>
-            <li className={location.pathname === '/edit-profile' ? styles.active : ''}>
-              <Link to="/edit-profile">Edit Profile</Link>
+            <li className={location.pathname === '/profile' ? styles.active : ''}>
+              <Link to="/profile">Edit Profile</Link>
             </li>
             <li className={location.pathname === '/check-applications' ? styles.active : ''}>
               <Link to="/check-applications">Check Applications</Link>
             </li>
             <li>
-              <div style={{ display: 'flex', alignItems: 'center' }}>
                 <button onClick={handleLogout} className={styles.logoutButton} type="submit">
                   Logout
                 </button>
-              </div>
             </li>
           </ul>
         </aside>
 
         {/* Main Dashboard Area */}
         <section className={styles.dashboardContent}>
-          <h2>Welcome to the Dashboard, {userDetails.first_name}</h2>
           {/* Add your dashboard-specific content here */}
             <div className={styles.dashboardContainer}>
                 <h2>Available Job Listings</h2>
