@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import User, JobListing, Application, Branch
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 class BranchSerializer(serializers.ModelSerializer):
     class Meta:
@@ -11,7 +12,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'password','roll_number','course', 'branch', 'cgpa', 'is_student', 'is_admin']
+        fields = ['username','email', 'first_name', 'password','roll_number','course', 'branch', 'cgpa', 'is_student', 'is_admin']
 
     def validate(self, data):
         # If the user is a student, ensure roll_number and branch are provided
@@ -129,9 +130,11 @@ class RegisterSerializer(serializers.ModelSerializer):
         return user
 '''
 
-        
+
     
 class UserProfileSerializer(serializers.ModelSerializer):
+    branch = BranchSerializer()
+
     class Meta:
         model = User
-        fields = ['username', 'email', 'first_name', 'last_name']
+        fields = ['username','first_name','last_name', 'roll_number','course','email', 'branch', 'cgpa' ]

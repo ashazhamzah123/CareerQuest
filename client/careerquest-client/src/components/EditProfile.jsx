@@ -77,7 +77,7 @@ const EditProfile = () => {
           const token = localStorage.getItem('access_token'); // Retrieve token from local storage
         
           try {
-            const response = await fetch(`${backend_url}/user-details/`, {
+            const response = await fetch(`${backend_url}/student-details/`, {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',

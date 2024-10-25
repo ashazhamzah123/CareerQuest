@@ -4,6 +4,7 @@ import styles from "./LoginPage.module.css"; // Reuse the CSS from the login pag
 import { Link } from 'react-router-dom';
 
 const RegisterPage = () => {
+  const backend_url = "http://127.0.0.1:8000/api";
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -27,7 +28,7 @@ const RegisterPage = () => {
     }
     else{
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/register/', {
+      const response = await fetch(`${backend_url}/register/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -60,7 +61,7 @@ const RegisterPage = () => {
           </nav>
       <div className={styles.registerdiv}>
       <div className={styles.logincard}>
-        <h1>Register</h1>
+        <h1>Registration</h1>
         <form onSubmit={handleSubmit}>
           <input className={styles.login_form_input}
             type="text"
@@ -112,7 +113,7 @@ const RegisterPage = () => {
             onChange={handleChange}
           />
           <input className={styles.login_form_input}
-            type="text"
+            type="number"
             name="branch"
             placeholder="Branch"
             value={formData.branch}
@@ -129,7 +130,6 @@ const RegisterPage = () => {
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2 }}
             className={styles.login_form_button}  // Reuse login button styles
           >
             Register

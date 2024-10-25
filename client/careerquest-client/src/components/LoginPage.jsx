@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import styles from "./LoginPage.module.css";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
+  const backend_url = "http://127.0.0.1:8000/api";
   const [formData, setFormData] = useState({ username: '', password: '' });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -12,7 +14,7 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/login/', {
+      const response = await fetch(`${backend_url}/login/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -23,7 +25,21 @@ const LoginPage = () => {
       if (response.ok) {
         localStorage.setItem('access_token', data.access);
         localStorage.setItem('refresh_token', data.refresh);
-        window.location.href = '/profile'; // Redirect after login
+        const userResponse = await fetch(`${backend_url}/user-details/`, {
+          headers: {
+            'Authorization': `Bearer ${data.access}`
+          }
+        });
+        if (userResponse.ok) {
+          const userData = await userResponse.json();
+          if (userData.is_admin === true) {
+            navigate('/adminProfile');
+          } else {
+            navigate('/profile');
+          }
+        } else {
+          console.error("Failed to fetch user details.");
+        }
       } else {
         alert('Login failed. Please try again.');
       }

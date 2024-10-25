@@ -167,7 +167,7 @@ const DashboardPage = () => {
               <Link to="/jobs">Job Listing</Link>
             </li>
             <li className={location.pathname === '/profile' ? styles.active : ''}>
-              <Link to="/profile">Edit Profile</Link>
+              <Link to="/profile">Profile</Link>
             </li>
             <li className={location.pathname === '/check-applications' ? styles.active : ''}>
               <Link to="/check-applications">Check Applications</Link>

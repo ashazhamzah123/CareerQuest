@@ -8,6 +8,8 @@ import CheckApplications from './components/CheckApplications'
 import EditProfile from './components/EditProfile'
 import HomePage from './components/HomePage'
 import AdminRegisterPage from './components/AdminRegisterPage';
+import Adminprofile from './components/Adminprofile';
+import Createjob from './components/CreateJobs';
 
 function App() {
   return (
@@ -19,16 +21,11 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/admin/register" element={<AdminRegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route 
-            path="/jobs" 
-            element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            } 
-          />
+          <Route path="/jobs" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path='/check-applications' element = {<ProtectedRoute><CheckApplications/></ProtectedRoute>}/>
           <Route path='/profile' element = {<ProtectedRoute><EditProfile/></ProtectedRoute>}/>
+          <Route path='/adminProfile' element = {<ProtectedRoute><Adminprofile/></ProtectedRoute>}/>
+          <Route path='/createjob' element = {<ProtectedRoute><Createjob/></ProtectedRoute>}/>
         </Routes>
       </div>
     </Router>

@@ -8,6 +8,7 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
 from django.contrib.auth import get_user_model
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 class EligibleJobsView(generics.ListAPIView):
     serializer_class = JobListingSerializer
@@ -42,10 +43,18 @@ class RegisterView(APIView):
             }, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        
+        # Add custom claims
+        data['is_admin'] = self.user.is_admin
+        
+        return data
 
 
 class LoginView(TokenObtainPairView): #handling of JWT token generation (access and refresh tokens) for login.
-    pass
+    serializer_class = CustomTokenObtainPairSerializer
 
 
 class JobCreateView(viewsets.ModelViewSet):
@@ -137,6 +146,14 @@ class UserDetails(APIView):
     def get(self, request):
         user = request.user
         serializer = UserSerializer(user)
+        return Response(serializer.data)
+    
+class StudentDetails(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        serializer = UserProfileSerializer(user)
         return Response(serializer.data)
     
 
