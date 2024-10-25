@@ -10,6 +10,8 @@ import HomePage from './components/HomePage'
 import AdminRegisterPage from './components/AdminRegisterPage';
 import Adminprofile from './components/Adminprofile';
 import Createjob from './components/CreateJobs';
+import Managejobs from './components/ManageJobs';
+
 
 function App() {
   return (
@@ -26,6 +28,7 @@ function App() {
           <Route path='/profile' element = {<ProtectedRoute><EditProfile/></ProtectedRoute>}/>
           <Route path='/adminProfile' element = {<ProtectedRoute><Adminprofile/></ProtectedRoute>}/>
           <Route path='/createjob' element = {<ProtectedRoute><Createjob/></ProtectedRoute>}/>
+          <Route path='/managejobs' element = {<ProtectedRoute><Managejobs/></ProtectedRoute>}/>
         </Routes>
       </div>
     </Router>

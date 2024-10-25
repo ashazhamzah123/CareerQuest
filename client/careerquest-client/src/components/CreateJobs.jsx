@@ -98,8 +98,8 @@ const Createjob = () => {
                         <li className={location.pathname === '/adminProfile' ? styles.active : ''}>
                             <Link to="/adminProfile">Profile</Link>
                         </li>
-                        <li className={location.pathname === '/check-applications' ? styles.active : ''}>
-                            <Link to="/check-applications">Check Applications</Link>
+                        <li className={location.pathname === '/managejobs' ? styles.active : ''}>
+                            <Link to="/managejobs">Manage Jobs</Link>
                         </li>
                         <li>
                         <button onClick={handleLogout} className={styles.logoutButton}>

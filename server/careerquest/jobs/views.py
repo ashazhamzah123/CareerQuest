@@ -113,14 +113,18 @@ class AppliedJobsView(APIView): #API to show jobs a student has applied for
         serializer = ApplicationSerializer(applied_jobs, many=True)
         return Response(serializer.data)
 
-class JobApplicantsView(APIView): #API to show all students that applied for a job
+class JobApplicantsView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, pk):
-        job = JobListing.objects.get(pk=pk)
-        applicants = job.applied_students.all()  # assuming a relation exists
-        serializer = UserSerializer(applicants, many=True)
-        return Response(serializer.data)
+        try:
+            job = JobListing.objects.get(pk=pk)
+            applications = Application.objects.filter(job=job)
+            applicants = [app.student for app in applications]  # Extracting the students from the applications
+            serializer = UserProfileSerializer(applicants, many=True)
+            return Response(serializer.data)
+        except JobListing.DoesNotExist:
+            return Response({"error": "Job not found"}, status=404)
 
 class JobsListView(APIView):
     permission_classes = [IsAuthenticated]
