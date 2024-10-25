@@ -11,7 +11,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'password','roll_number', 'branch', 'cgpa', 'is_student', 'is_admin']
+        fields = ['username', 'first_name', 'password','roll_number','course', 'branch', 'cgpa', 'is_student', 'is_admin']
 
     def validate(self, data):
         # If the user is a student, ensure roll_number and branch are provided
@@ -25,6 +25,7 @@ class UserSerializer(serializers.ModelSerializer):
         if data.get('is_admin'):
             data.pop('roll_number', None)  # Remove roll_number if it's present for admins
             data.pop('branch', None)  # Remove branch if it's present for admins
+            data.pop('course', None)
         
         return data
 

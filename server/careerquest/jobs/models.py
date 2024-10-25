@@ -46,6 +46,7 @@ class User(AbstractUser):
     roll_number = models.CharField(max_length=10, unique=True, null=True, blank=True)
     branch = models.ForeignKey(Branch, on_delete=models.CASCADE, null=True, blank=True)
     cgpa = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)
+    course = models.CharField(max_length=10, null=True, blank=True, default='Btech')
     is_student = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     def clean(self):

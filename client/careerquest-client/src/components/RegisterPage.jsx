@@ -22,6 +22,10 @@ const RegisterPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (formData.cgpa>10){
+      alert('CGPA can only be out of 10');
+    }
+    else{
     try {
       const response = await fetch('http://127.0.0.1:8000/api/register/', {
         method: 'POST',
@@ -38,6 +42,7 @@ const RegisterPage = () => {
     } catch (error) {
       console.error('Error during registration:', error);
     }
+  }
   };
 
   return (
@@ -97,6 +102,13 @@ const RegisterPage = () => {
             name="roll_number"
             placeholder="Roll Number"
             value={formData.roll_number}
+            onChange={handleChange}
+          />
+          <input className={styles.login_form_input}
+            type="text"
+            name="course"
+            placeholder="Course"
+            value={formData.course}
             onChange={handleChange}
           />
           <input className={styles.login_form_input}
