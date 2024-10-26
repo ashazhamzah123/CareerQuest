@@ -17,6 +17,45 @@ const Managejobs = () => {
         navigate("/Login");
     };
 
+    const deleteJob = async (jobId) => {
+        const token = localStorage.getItem('access_token');
+        console.log("Deleting job with ID:", jobId);
+      
+        try {
+          const response = await fetch(`${backend_url}/jobs/${jobId}/delete/`, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`, // Pass token in headers
+            },
+          });
+      
+          if (response.status === 401) {
+            alert('Session timed out. Please log in again.');
+            localStorage.removeItem('access_token');
+            localStorage.removeItem('refresh_token');
+            window.location.href = '/login';
+            return;
+          } else if (response.status === 404) {
+            alert('No such job exists');
+          } else if (response.ok) {
+            alert('Job deleted successfully!');
+      
+            // Remove job ID from applied jobs in local storage and state
+            const appliedJobsKey = `appliedJobs_${userDetails.roll_number}`;
+            setAppliedJobs((prevApplied) => {
+              const updatedAppliedJobs = prevApplied.filter(id => id !== jobId);
+              localStorage.setItem(appliedJobsKey, JSON.stringify(updatedAppliedJobs));
+              return updatedAppliedJobs;
+            });
+          } else {
+            throw new Error('Failed to delete the job');
+          }
+        } catch (err) {
+          alert(`Error: ${err.message}`);
+        }
+      };
+
     useEffect(() => {
         const fetchJobs = async () => {
           const token = localStorage.getItem('access_token'); // Retrieve the access token
@@ -100,8 +139,8 @@ const Managejobs = () => {
                         Edit
                       </button>
                       <button
-                        className={styles['apply-button']}
-                        onClick={() => (window.location.href = `/jobs/${job.id}/delete`)} 
+                        className={styles['delete-button']}
+                        onClick={() => deleteJob(job.id)}
                       >
                         Delete
                       </button>
