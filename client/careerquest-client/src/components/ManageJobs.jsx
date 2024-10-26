@@ -40,14 +40,7 @@ const Managejobs = () => {
             alert('No such job exists');
           } else if (response.ok) {
             alert('Job deleted successfully!');
-      
-            // Remove job ID from applied jobs in local storage and state
-            const appliedJobsKey = `appliedJobs_${userDetails.roll_number}`;
-            setAppliedJobs((prevApplied) => {
-              const updatedAppliedJobs = prevApplied.filter(id => id !== jobId);
-              localStorage.setItem(appliedJobsKey, JSON.stringify(updatedAppliedJobs));
-              return updatedAppliedJobs;
-            });
+            setJobs((prevJobs) => prevJobs.filter((job) => job.id !== jobId));
           } else {
             throw new Error('Failed to delete the job');
           }

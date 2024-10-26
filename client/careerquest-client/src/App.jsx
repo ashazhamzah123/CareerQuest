@@ -11,6 +11,7 @@ import AdminRegisterPage from './components/AdminRegisterPage';
 import Adminprofile from './components/Adminprofile';
 import Createjob from './components/CreateJobs';
 import Managejobs from './components/ManageJobs';
+import Jobapplicants from './components/JobApplicants';
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
           <Route path='/adminProfile' element = {<ProtectedRoute><Adminprofile/></ProtectedRoute>}/>
           <Route path='/createjob' element = {<ProtectedRoute><Createjob/></ProtectedRoute>}/>
           <Route path='/managejobs' element = {<ProtectedRoute><Managejobs/></ProtectedRoute>}/>
+          <Route path='/jobs/:jobId/applicants' element = {<ProtectedRoute><Jobapplicants/></ProtectedRoute>}/>
         </Routes>
       </div>
     </Router>

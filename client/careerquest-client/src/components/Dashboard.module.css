@@ -4,6 +4,7 @@
     flex-direction: column;
     height: 100vh;
     font-family: Arial, Helvetica, sans-serif;
+    overflow-y: auto;
   }
   
   .navbar {
@@ -256,3 +257,56 @@
   .delete-button:hover {
     background-color: #8a0202;
   }
+
+  /* JobApplicants.module.css */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.title {
+  font-size: 2em;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.applicantList {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.applicantCard {
+  background: #f7f9fc;
+  border: 1px solid #e0e4e8;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.applicantCard:hover {
+  transform: translateY(-3px);
+}
+
+.applicantDetails {
+  margin: 10px 0;
+}
+
+.detailLabel {
+  font-weight: bold;
+  color: #34495e;
+}
+
+.noApplicants {
+  font-size: 1.2em;
+  color: #7f8c8d;
+}
