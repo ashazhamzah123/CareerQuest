@@ -6,7 +6,7 @@
   overflow-y: auto;
   }
   .homecontainer{
-    background: linear-gradient(45deg, #252525, #323131, #261e3c, #322b40);
+    background: linear-gradient(45deg, #18266e, #000474, #261e3c, #4f1d8b);
     background-size: 400% 400%;
     animation: gradientAnimation 15s ease infinite; 
     background-color: #1a1a1a;
@@ -33,7 +33,29 @@
       background-position: 0% 50%;
     }
 }
-  
+
+.navbarLeft {
+  display: flex;
+  align-items: center;
+}
+
+.navbarLogo {
+  height: 40px;
+  cursor: pointer;
+}
+
+.navbarTitle {
+  font-family: Arial, Helvetica, sans-serif;
+  margin-left: 10px;
+  font-size: 1.5rem;
+}
+
+
+.button-container {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
   .register-button {
     background-color: #007BFF;
     color: white;
@@ -41,7 +63,6 @@
     text-decoration: none;
     border-radius: 5px;
     margin-right: 15px;
-    margin-top: 15px;
     margin-bottom: 20px;
     font-size: 16px;
     transition: background-color 0.3s ease;
@@ -55,7 +76,7 @@
     color: #ebebeb;
     font-size: 1em;
     width: 440px;
-    height: 200px;
+    height:fit-content;
     transition: transform 1s ease;
     transform: translateY(-5px);
     font-family: Arial, Helvetica, sans-serif;
@@ -64,11 +85,25 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: rgba(255, 255, 255, 0.1); /* Transparent form background */
 }
+.h2TextCard {
+  z-index: 2;
+  color: #ebebeb;
+  font-size: 1em;
+  width: 440px;
+  height: 200px;
+  margin-left: 120%;
+  transform: translateY(-5px);
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.1); /* Transparent form background */
+}
 .textdiv{
   flex: 1;
   display: flex;
   margin-left: 5%;
-  margin-top: 10%;
+  margin-top: 5%;
 }
 
 .fadeIn {
@@ -97,3 +132,9 @@
   }
 }
   
+
+.description {
+  font-size: 1rem;
+  margin-bottom: 25px;
+  line-height: 1.5;
+}

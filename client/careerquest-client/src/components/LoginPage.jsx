@@ -41,7 +41,7 @@ const LoginPage = () => {
           console.error("Failed to fetch user details.");
         }
       } else {
-        alert('Login failed. Please try again.');
+        alert('Invalid credentials. Please try again.');
       }
     } catch (error) {
       console.error('Login error:', error);

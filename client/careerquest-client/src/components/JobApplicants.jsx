@@ -63,6 +63,7 @@ const Jobapplicants = () => {
                         </li>
                     </ul>
                 </aside>
+                <section className={styles.dashboardContent}>
                 <div className={styles.dashboardContainer}>
                 <h1 className={styles.title}>Applicants for Job {jobId}</h1>
       {applicants.length > 0 ? (
@@ -97,6 +98,7 @@ const Jobapplicants = () => {
         <p className={styles.noApplicants}>No applicants found for this job.</p>
       )}
             </div>
+            </section>
             </div>
         </div>
     );

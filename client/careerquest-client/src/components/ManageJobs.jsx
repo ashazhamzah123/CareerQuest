@@ -109,6 +109,7 @@ const Managejobs = () => {
                         </li>
                     </ul>
                 </aside>
+                <section className={styles.dashboardContent}>
                 <div className={styles.dashboardContainer}>
                 <h2>Jobs</h2>
                 <div className={styles['job-list']}>
@@ -142,6 +143,7 @@ const Managejobs = () => {
                     ))}
                 </div>
             </div>
+            </section>
             </div>
         </div>
     );

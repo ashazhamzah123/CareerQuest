@@ -24,9 +24,25 @@ const Homepage = () => {
       >
       <div className={styles.homeTextCard}>
       <h1>Welcome to CareerQuest</h1>
-      <p>Explore job opportunities and manage your career with us. Get Started</p>
+      <h2>Explore Opportunities</h2>
+      <div className={styles.description}>Discover job listings tailored to your field of study, skills, and aspirations. Browse positions, connect with top employers, and gain insights into companies across various industries.</div>
+      <div className={styles['button-container']}>
       <Link to="/register" className={styles['register-button']}>Create Student Account</Link>
       <Link to="/admin/register" className={styles['register-button']}>Create Admin Account</Link>
+      </div>
+      </div>
+      </div>
+      </div>
+      <div className={styles.textdiv}>
+      <div
+        className={styles['text-section']}
+      >
+      <div className={styles.h2TextCard}>
+      <h2>Track Your Applications</h2>
+      <div className={styles.description}>Stay organized with an easy-to-use dashboard to monitor your application status, upcoming interviews, and deadlines, helping you stay on track toward your goals.</div>
+      <div className={styles['button-container']}>
+        <Link to="/login" className={styles['register-button']}>Login</Link>
+      </div>
       </div>
       </div>
       </div>
