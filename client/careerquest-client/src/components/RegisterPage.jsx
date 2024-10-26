@@ -62,6 +62,7 @@ const RegisterPage = () => {
             </div>
           </nav>
       <div className={styles.registerdiv}>
+        <div className={styles.loginTextSection}>
       <div className={styles.logincard}>
         <h1>Registration</h1>
         <form onSubmit={handleSubmit}>
@@ -139,6 +140,7 @@ const RegisterPage = () => {
           <p>Already Have an account? <Link to='/login' className={styles.link}>Login</Link></p>
         </form>
         </div>
+      </div>
       </div>
     </div>
     </div>

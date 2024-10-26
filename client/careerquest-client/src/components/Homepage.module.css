@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
+  overflow-y: auto;
   }
   .homecontainer{
     background: linear-gradient(45deg, #252525, #323131, #261e3c, #322b40);
@@ -68,5 +69,31 @@
   display: flex;
   margin-left: 5%;
   margin-top: 10%;
+}
+
+.fadeIn {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.hidden {
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+/* styles.css */
+
+.text-section {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideUp 0.6s ease forwards;
+}
+
+@keyframes slideUp {
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
 }
   

@@ -67,6 +67,7 @@ const LoginPage = () => {
       </nav>
       {/*login window*/}
       <div className={styles.logindiv}>
+        <div className={styles.loginTextSection}>
         <div className={styles.logincard}>
           <h1>Login</h1>
             <form onSubmit={handleSubmit}>
@@ -90,6 +91,7 @@ const LoginPage = () => {
               Haven't Registered yet? <Link to="/register" className={styles.link}>Create Account</Link>
             </p>     
             </div>
+        </div>
         </div>
         </div>
 
