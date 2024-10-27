@@ -216,9 +216,9 @@
     max-height: fit-content;
     margin: 0 auto;
     padding: 20px;
-    background-color: #ece5ff;
+    background-color: #f1f1f1;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
+    border-radius: 10px;
   }
   
   .cardTitle {

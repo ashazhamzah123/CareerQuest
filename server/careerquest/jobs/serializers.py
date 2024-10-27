@@ -8,7 +8,7 @@ class BranchSerializer(serializers.ModelSerializer):
         fields = ['name']
 
 class UserSerializer(serializers.ModelSerializer):
-    branch = serializers.PrimaryKeyRelatedField(queryset=Branch.objects.all())  # Make branch optional since admins don't need it
+    branch = serializers.PrimaryKeyRelatedField(queryset=Branch.objects.all(), required=False)  # Make branch optional since admins don't need it
 
     class Meta:
         model = User
@@ -33,19 +33,12 @@ class UserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         # Extract branch data separately, if it exists
         branch = validated_data.pop('branch', None)
-        
-        # Create the user
         user = User.objects.create(**validated_data)
         user.set_password(validated_data['password']) 
         user.save()
-
-        # If the user is a student and branch is provided, set the branch
         if validated_data.get('is_student') and branch is not None:
             user.branch = branch
             user.save()
-        
-         # Set password securely
-        
 
         return user
 
@@ -141,3 +134,8 @@ class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['username','first_name','last_name', 'roll_number','course','email', 'branch', 'cgpa' ]
+
+class AdminProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'first_name', 'last_name']

@@ -1,6 +1,6 @@
 from rest_framework import generics, permissions, serializers, status, viewsets
 from .models import JobListing, Application, User
-from .serializers import JobListingSerializer, ApplicationSerializer, RegisterSerializer, UserProfileSerializer, UserSerializer
+from .serializers import JobListingSerializer, ApplicationSerializer, RegisterSerializer, UserProfileSerializer, UserSerializer, AdminProfileSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.contrib.auth.models import User
 from rest_framework.response import Response
@@ -121,6 +121,30 @@ class UserProfileUpdateView(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+
+class AdminProfileUpdateView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self, request):
+        return request.user  # Assuming the admin is the logged-in user
+
+    def get(self, request):
+        user = self.get_object(request)
+        serializer = UserSerializer(user)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def patch(self, request):
+        user = self.get_object(request)
+        data = request.data
+        serializer = UserSerializer(user, data=request.data, partial=True)
+        if serializer.is_valid():
+            if 'password' in data and data['password']:
+                user.set_password(data['password'])
+            user.save()
+            update_session_auth_hash(request, user)
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
 class AppliedJobsView(APIView): #API to show jobs a student has applied for
     permission_classes = [IsAuthenticated]
 
@@ -169,6 +193,14 @@ class UserDetails(APIView):
     def get(self, request):
         user = request.user
         serializer = UserSerializer(user)
+        return Response(serializer.data)
+    
+class AdminDetails(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        serializer = AdminProfileSerializer(user)
         return Response(serializer.data)
     
 class StudentDetails(APIView):

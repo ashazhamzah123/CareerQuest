@@ -1,7 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import styles from './Dashboard.module.css'; // Import CSS module
-import { Card, CardContent, Typography, Button, Avatar, Grid2 } from '@mui/material';
+
+const branchOptions = [
+  { value: 3, label: 'Computer Science Engineering' },
+  { value: 1, label: 'Electronics and Communication Engineering' },
+  { value: 7, label: 'Mechanical Engineering' },
+  { value: 9, label: 'Civil Engineering' },
+  { value: 2, label: 'Electrical and Electronics Engineering' },
+  { value: 5, label: 'Biotechnology Engineering' },
+  { value: 4, label: 'Chemical Engineering' },
+  { value: 8, label: 'Maths and Computing' },
+  { value: 6, label: 'MME' },
+];
 
 const Jobapplicants = () => {
     const backend_url = "http://127.0.0.1:8000/api";
@@ -9,11 +20,17 @@ const Jobapplicants = () => {
     const navigate = useNavigate();
     const { jobId } = useParams(); // Assuming jobId is passed via route params
     const [applicants, setApplicants] = useState([]);
+    const [jobTitle, setJobTitle] = useState('');
 
     const handleLogout = () => {
         localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');
         navigate("/Login");
+    };
+
+    const getBranchName = (branchId) => {
+      const branch = branchOptions.find(option => option.value === branchId);
+      return branch ? branch.label : "Unknown Branch";
     };
 
   useEffect(() => {
@@ -24,6 +41,10 @@ const Jobapplicants = () => {
             'Authorization': `Bearer ${localStorage.getItem('access_token')}`
           }
         });
+        if (response.status === 401) {
+          alert('Session timed out. Please log in again.'); // Popup alert
+          handleLogout();
+          return; }
         if (response.ok) {
           const data = await response.json();
           setApplicants(data);
@@ -35,7 +56,34 @@ const Jobapplicants = () => {
       }
     };
 
+  
+
     fetchApplicants();
+  }, [jobId]); // State to hold the job title
+
+  // Fetch job details to get the title
+  useEffect(() => {
+    const fetchJobDetails = async () => {
+      try {
+        const token = localStorage.getItem('access_token');
+        const response = await fetch(`${backend_url}/jobs/${jobId}/`, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setJobTitle(data.title); // Set job title in state
+        } else {
+          console.error("Failed to fetch job details");
+        }
+      } catch (error) {
+        console.error("Error fetching job details:", error);
+      }
+    };
+    fetchJobDetails();
   }, [jobId]);
 
     return (
@@ -65,7 +113,7 @@ const Jobapplicants = () => {
                 </aside>
                 <section className={styles.dashboardContent}>
                 <div className={styles.dashboardContainer}>
-                <h1 className={styles.title}>Applicants for Job {jobId}</h1>
+                <h1 className={styles.title}>Applicants for {jobTitle}</h1>
       {applicants.length > 0 ? (
         <div className={styles.applicantList}>
           {applicants.map((applicant) => (
@@ -86,7 +134,7 @@ const Jobapplicants = () => {
                 <span className={styles.detailLabel}>Course:</span> {applicant.course}
               </div>
               <div className={styles.applicantDetails}>
-                <span className={styles.detailLabel}>Branch:</span> {applicant.branch.name}
+                <span className={styles.detailLabel}>Branch:</span> {getBranchName(applicant.branch)}
               </div>
               <div className={styles.applicantDetails}>
                 <span className={styles.detailLabel}>CGPA:</span> {applicant.cgpa}

@@ -61,9 +61,6 @@ const LoginPage = () => {
           </Link>
         
         </div>
-        <div className={styles.navbarRight}>
-          <img src="/path-to-profile-icon" alt="Profile" className={styles.profileIcon} />
-        </div>
       </nav>
       {/*login window*/}
       <div className={styles.logindiv}>

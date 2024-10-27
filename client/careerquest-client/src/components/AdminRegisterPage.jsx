@@ -50,9 +50,6 @@ const RegisterPage = () => {
                     <h1>CareerQuest</h1>
               </Link>
             </div>
-            <div className={styles.navbarRight}>
-              <img src="/path-to-profile-icon" alt="Profile" className={styles.profileIcon} />
-            </div>
           </nav>
       <div className={styles.registerdiv}>
         <div className={styles.loginTextSection}>

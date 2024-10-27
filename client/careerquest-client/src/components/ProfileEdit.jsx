@@ -98,7 +98,7 @@ const ProfileEdit = () => {
         const token = localStorage.getItem('access_token');
         try {
             const response = await fetch(`${backend_url}/user/update/`, {
-                method: 'PUT',
+                method: 'PATCH',
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json',

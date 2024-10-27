@@ -64,7 +64,7 @@ const RegisterPage = () => {
     }
   }
   };
-  const customStyles = {
+  const customStyles = {//STYLE FOR SELECT DROP DOWN IN REGISTER PAGE
     control: (provided) => ({
         ...provided,
         width: '98%', // Match input width
@@ -124,9 +124,6 @@ const RegisterPage = () => {
               <Link to="/" className={styles.navbarTitle}>
             <h1>CareerQuest</h1>
           </Link>
-            </div>
-            <div className={styles.navbarRight}>
-              <img src="/path-to-profile-icon" alt="Profile" className={styles.profileIcon} />
             </div>
           </nav>
       <div className={styles.registerdiv}>

@@ -9,16 +9,43 @@ const Adminprofile = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [userDetails, setUserDetails] = useState({
+    const [formData, setFormData] = useState({
         username: '',
         first_name: '',
         last_name: '',
         email: '',
+        password: '',
         is_admin: false,
     });
 
-    const handleEdit = () => {
-        navigate(`/edit-profile/admin`);
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const token = localStorage.getItem('access_token');
+        try {
+            const response = await fetch(`${backend_url}/admin/update/`, {
+                method: 'PATCH',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+            if (response.ok) {
+                alert('Profile updated successfully!');
+                navigate('/adminProfile'); // Redirect to profile page or desired page
+            } else {
+                alert('Failed to update profile.');
+            }
+        } catch (error) {
+            setError(error.message);
+        }
     };
 
     const handleLogout = () => {
@@ -47,10 +74,10 @@ const Adminprofile = () => {
                     return; 
                   }
                 if (!response.ok) {
-                    throw new Error('Failed to fetch user details');
+                    throw new Error('Failed to fetch admin details');
                 }
                 const data = await response.json();
-                setUserDetails(data);
+                setFormData(data);
             } catch (err) {
                 setError(err.message);
             } finally {
@@ -89,41 +116,36 @@ const Adminprofile = () => {
                     </ul>
                 </aside>
 
-                <div className={styles.carddiv}>
-                    <Card className={styles.profileCard}>
-                        <CardContent>
-                            <Typography variant="h5" component="div" gutterBottom className={styles.cardTitle}>
-                                Admin Details
-                            </Typography>
-                            <Grid2 container spacing={2}>
-                                <Grid2 item xs={12} sm={4}>
-                                    <Avatar
-                                        alt={userDetails.first_name}
-                                        src="/path/to/profile-picture.jpg"
-                                        sx={{ width: 120, height: 120 }}
-                                        className={styles.profileAvatar}
-                                    />
-                                </Grid2>
+                <section className={styles.EditContent}>
+        <h1>Edit Profile</h1>
+        <form onSubmit={handleSubmit}>
+        <div className={styles.fieldContainer}>
+    <label>First Name</label>
+    <input className={styles.input} type="text" name="first_name" placeholder="First Name" value={formData.first_name} onChange={handleChange} />
+  </div>
 
-                                <Grid2 item xs={12} sm={8}>
-                                    <Typography variant='body1'>Username: {userDetails.username}</Typography>
-                                    <Typography variant='body1'>Name: {userDetails.first_name} {userDetails.last_name}</Typography>
-                                    <Typography variant='body1'>Email: {userDetails.email}</Typography>
+  <div className={styles.fieldContainer}>
+    <label>Last Name</label>
+    <input className={styles.input} type="text" name="last_name" placeholder="Last Name" value={formData.last_name} onChange={handleChange} rows={5} />
+  </div>
 
-                                    <Button
-                                        variant="contained"
-                                        color="primary"
-                                        className={styles.applyButton}
-                                        onClick={handleEdit}
-                                        sx={{ marginTop: 2 }}
-                                    >
-                                        Edit Profile
-                                    </Button>
-                                </Grid2>
-                            </Grid2>
-                        </CardContent>
-                    </Card>
-                </div>
+  <div className={styles.fieldContainer}>
+    <label>Username</label>
+    <input className={styles.input} type="text" name="username" placeholder="Username" value={formData.username} onChange={handleChange} />
+  </div>
+  <div className={styles.fieldContainer}>
+    <label>New Password</label>
+    <input className={styles.input} type="password" name="password" placeholder="New Password" value={formData.password} onChange={handleChange} />
+  </div>
+
+  <div className={styles.fieldContainer}>
+    <label>Email</label>
+    <input className={styles.input} type="text" name="email" placeholder="Email" value={formData.email} onChange={handleChange} />
+  </div>
+
+  <button type="submit" className={styles['details-button']}>Update</button>
+        </form>
+        </section>
             </div>
         </div>
     );

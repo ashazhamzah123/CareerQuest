@@ -14,34 +14,47 @@ const Homepage = () => {
               {/*<img src="/path-to-your-logo" alt="logo" className={styles.navbarLogo} />*/}
               <h1 className={styles.navbarTitle}>CareerQuest</h1>
             </div>
-            <div className={styles.navbarRight}>
-              <img src="/path-to-profile-icon" alt="Profile" className={styles.profileIcon} />
-            </div>
           </nav>
       <div className={styles.textdiv}>
-      <div
-        className={styles['text-section']}
-      >
+      <div className={styles['text-section']}>
+        
       <div className={styles.homeTextCard}>
       <h1>Welcome to CareerQuest</h1>
-      <h2>Explore Opportunities</h2>
-      <div className={styles.description}>Discover job listings tailored to your field of study, skills, and aspirations. Browse positions, connect with top employers, and gain insights into companies across various industries.</div>
-      <div className={styles['button-container']}>
-      <Link to="/register" className={styles['register-button']}>Create Student Account</Link>
-      <Link to="/admin/register" className={styles['register-button']}>Create Admin Account</Link>
+      <div className={styles.description}>CareerQuest is your dedicated platform for discovering on-campus job opportunities tailored to your qualifications and interests. Designed with students and administrators in mind, CareerQuest simplifies the placement process, helping students find roles that match their academic achievements and career aspirations.</div>
+      </div>
+      <div className={styles.row}>
+      <div className={styles['text-section']}>
+        
+      <div className={styles.newTextCard}>
+          <h2>For Administrators</h2>
+          <div className={styles.description}>
+            <ul>
+              <li>Post new job listings with ease, detailing the specific qualifications required.</li>
+              <li>Access tools to review applicants and communicate with top candidates.</li>
+              <li>Manage and update job opportunities to keep students informed.</li>
+            </ul>
+          </div>
+          <div className={styles['button-container']}>
+            <Link to="/admin/register" className={styles['register-button']}>Create Admin Account</Link>
+            <Link to="/login" className={styles['register-button']}>Login</Link>
+          </div>
       </div>
       </div>
-      </div>
-      </div>
-      <div className={styles.textdiv}>
-      <div
-        className={styles['text-section']}
-      >
+      <div className={styles['text-section']}>
       <div className={styles.h2TextCard}>
-      <h2>Track Your Applications</h2>
-      <div className={styles.description}>Stay organized with an easy-to-use dashboard to monitor your application status, upcoming interviews, and deadlines, helping you stay on track toward your goals.</div>
+      <h2>For Students:</h2>
+      <div className={styles.description}>
+        <ul>
+          <li>Browse a curated list of job opportunities specifically aligned with your profile.</li>
+          <li>Apply directly to positions you qualify for based on your CGPA, branch, and course.</li>
+          <li>Stay organized with your applications and track your progress as you move through the placement process.</li>
+        </ul>
+      </div>
       <div className={styles['button-container']}>
+        <Link to="/register" className={styles['register-button']}>Create Student Account</Link>
         <Link to="/login" className={styles['register-button']}>Login</Link>
+      </div>
+      </div>
       </div>
       </div>
       </div>

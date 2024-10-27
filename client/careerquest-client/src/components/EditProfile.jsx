@@ -3,6 +3,17 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styles from './Dashboard.module.css'; // Import CSS module
 import { Card, CardContent, Typography, Button, Avatar, Grid2 } from '@mui/material';
 
+const branchOptions = [
+  { value: 3, label: 'Computer Science Engineering' },
+  { value: 1, label: 'Electronics and Communication Engineering' },
+  { value: 7, label: 'Mechanical Engineering' },
+  { value: 9, label: 'Civil Engineering' },
+  { value: 2, label: 'Electrical and Electronics Engineering' },
+  { value: 5, label: 'Biotechnology Engineering' },
+  { value: 4, label: 'Chemical Engineering' },
+  { value: 8, label: 'Maths and Computing' },
+  { value: 6, label: 'MME' },
+];
 
 const EditProfile = () => {
     const backend_url = "http://127.0.0.1:8000/api";
@@ -20,48 +31,15 @@ const EditProfile = () => {
       branch: {name:''},
       cgpa: ''
     });
-    const [formData, setFormData] = useState({
-        username: '',
-        first_name: '',
-        email: '',
-        password: '',
-        roll_number: '',
-        branch: {name:''},
-        cgpa: ''
-      });
 
-  const handleEdit = () => {
-    navigate(`/edit-profile`);
-  };
-      const handleChange = (e) => {
-        setFormData({
-          ...formData,
-          [e.target.name]: e.target.value
-        });
-      };
-    
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const token = localStorage.getItem('access_token');
-        try {
-          const response = await fetch(`${backend_url}/user/update/`, {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`,
-            },
-            body: JSON.stringify(formData)
-          });
-          if (response.ok) {
-            alert('Updated successfully');
-          } else {
-            alert('Failed. Please try again.');
-          }
-        } catch (error) {
-          console.error('Error during registration:', error);
-        }
-      };
-    
+    const getBranchName = (branchId) => {
+      const branch = branchOptions.find(option => option.value === branchId);
+      return branch ? branch.label : "Unknown Branch";
+    };
+
+    const handleEdit = () => {
+      navigate(`/edit-profile`);
+    };
 
     const handleLogout = () => {
         const appliedJobsKey = `appliedJobs_${userDetails.id}`;
@@ -165,7 +143,7 @@ const EditProfile = () => {
             <Typography variant='body1'>Name: {userDetails.first_name} {userDetails.last_name}</Typography>
             {/*<p >Email: {userDetails.email}</p>*/}
             <Typography variant='body1'>Roll Number: {userDetails.roll_number}</Typography>
-            {!userDetails.isadmin && (<Typography variant='body1'>Branch: {userDetails.branch.name}</Typography>)}
+            {!userDetails.isadmin && (<Typography variant='body1'>Branch: {getBranchName(userDetails.branch)}</Typography>)}
             <Typography variant='body1'>CGPA: {userDetails.cgpa}</Typography>
             <button
               className={styles['apply-button']}
@@ -179,79 +157,6 @@ const EditProfile = () => {
       </CardContent>
     </div>
     </div>
-    {/*
-          {/*Profile form 
-          <section className={styles.EditContent}>
-            <h1>Profile</h1>
-            <form onSubmit={handleSubmit}>
-            <input className={styles.input}
-            type="text"
-            name="first_name"
-            placeholder="First Name"
-            value={formData.first_name}
-            onChange={handleChange}
-          />
-          <input className={styles.input}
-            type="text"
-            name="last_name"
-            placeholder="Last Name"
-            value={formData.last_name}
-            onChange={handleChange}
-          />
-          <input className={styles.input}
-            type="text"
-            name="username"
-            placeholder="Username"
-            value={formData.username}
-            onChange={handleChange}
-          />
-          <input className={styles.input}
-            type="text"
-            name="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
-          />
-          <input className={styles.input}
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
-          />
-          <input className={styles.input}
-            type="text"
-            name="roll_number"
-            placeholder="Roll Number"
-            value={formData.roll_number}
-            onChange={handleChange}
-          />
-          <input className={styles.input}
-            type="text"
-            name="branch"
-            placeholder="Branch"
-            value={formData.branch}
-            onChange={handleChange}
-          />
-          <input className={styles.input}
-            type="number"
-            name="cgpa"
-            placeholder="CGPA"
-            value={formData.cgpa}
-            onChange={handleChange}
-          />
-          <button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-            className={styles['details-button']}  // Reuse login button styles
-          >
-            Update
-          </button>
-            </form>
-          </section>
-          */}
         </div>
         </div>
        

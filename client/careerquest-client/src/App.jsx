@@ -15,6 +15,7 @@ import Jobapplicants from './components/JobApplicants';
 import Jobedit from './components/JobEdit';
 import Jobdetails from './components/JobDetails';
 import ProfileEdit from './components/ProfileEdit';
+import ProfileEditAdmin from './components/AdminProfileEdit';
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
           <Route path='/jobs/:jobId/update' element = {<ProtectedRoute><Jobedit/></ProtectedRoute>}/>
           <Route path='/jobs/:jobId/details' element = {<ProtectedRoute><Jobdetails/></ProtectedRoute>}/>
           <Route path='/edit-profile' element = {<ProtectedRoute><ProfileEdit/></ProtectedRoute>}/>
+          <Route path='/edit-profile/admin' element = {<ProtectedRoute><ProfileEditAdmin/></ProtectedRoute>}/>
         </Routes>
       </div>
     </Router>
