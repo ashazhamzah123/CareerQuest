@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { TextField, Button, Typography, Container, Box } from '@mui/material';
 import styles from "./LoginPage.module.css"; // Reuse the CSS from the login page
 import { Link } from 'react-router-dom';
 

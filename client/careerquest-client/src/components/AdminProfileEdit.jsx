@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styles from './Dashboard.module.css'; // Import CSS module
-import { Card, CardContent, Typography, Button, Avatar, Grid2 } from '@mui/material';
 
 const Adminprofile = () => {
     const backend_url = "http://127.0.0.1:8000/api";

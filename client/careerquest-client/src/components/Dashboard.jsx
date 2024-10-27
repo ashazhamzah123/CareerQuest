@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styles from './Dashboard.module.css'; // Import CSS module
-import LogoutIcon from '@mui/icons-material/Logout';
 
 const DashboardPage = () => {
   const backend_url = "http://127.0.0.1:8000/api";
@@ -153,9 +152,6 @@ const DashboardPage = () => {
           {/*<img src="/path-to-your-logo" alt="logo" className={styles.navbarLogo} />*/}
           <h1 className={styles.navbarTitle}>CareerQuest</h1>
         </div>
-        <div className={styles.navbarRight}>
-          <img src="/path-to-profile-icon" alt="Profile" className={styles.profileIcon} />
-        </div>
       </nav>
 
       {/* Main Content */}
@@ -185,6 +181,7 @@ const DashboardPage = () => {
           {/* Add your dashboard-specific content here */}
             <div className={styles.dashboardContainer}>
                 <h2>Available Job Listings</h2>
+                {jobs.length >0 ? (
                 <div className={styles['job-list']}>
                     {jobs.map((job) => (
                       <div className={styles['job-card']} key={job.id}>
@@ -210,6 +207,9 @@ const DashboardPage = () => {
                       </div>
                     ))}
                 </div>
+                ) : (
+                  <p className={styles.noApplicants}>No Jobs Available</p>
+                )}
             </div>
         </section>
       </div>

@@ -75,9 +75,6 @@ const CheckApplications = () => {
           {/*<img src="/path-to-your-logo" alt="logo" className={styles.navbarLogo} />*/}
           <h1 className={styles.navbarTitle}>CareerQuest</h1>
         </div>
-        <div className={styles.navbarRight}>
-          <img src="/path-to-profile-icon" alt="Profile" className={styles.profileIcon} />
-        </div>
       </nav>
 
       {/* Main Content */}
