@@ -12,6 +12,9 @@ import Adminprofile from './components/Adminprofile';
 import Createjob from './components/CreateJobs';
 import Managejobs from './components/ManageJobs';
 import Jobapplicants from './components/JobApplicants';
+import Jobedit from './components/JobEdit';
+import Jobdetails from './components/JobDetails';
+import ProfileEdit from './components/ProfileEdit';
 
 
 function App() {
@@ -31,6 +34,9 @@ function App() {
           <Route path='/createjob' element = {<ProtectedRoute><Createjob/></ProtectedRoute>}/>
           <Route path='/managejobs' element = {<ProtectedRoute><Managejobs/></ProtectedRoute>}/>
           <Route path='/jobs/:jobId/applicants' element = {<ProtectedRoute><Jobapplicants/></ProtectedRoute>}/>
+          <Route path='/jobs/:jobId/update' element = {<ProtectedRoute><Jobedit/></ProtectedRoute>}/>
+          <Route path='/jobs/:jobId/details' element = {<ProtectedRoute><Jobdetails/></ProtectedRoute>}/>
+          <Route path='/edit-profile' element = {<ProtectedRoute><ProfileEdit/></ProtectedRoute>}/>
         </Routes>
       </div>
     </Router>

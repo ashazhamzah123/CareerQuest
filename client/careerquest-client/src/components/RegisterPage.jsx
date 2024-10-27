@@ -1,7 +1,19 @@
 import React, { useState } from 'react';
-import { TextField, Button, Typography, Container, Box } from '@mui/material';
 import styles from "./LoginPage.module.css"; // Reuse the CSS from the login page
 import { Link } from 'react-router-dom';
+import Select from 'react-select';
+
+const branchOptions = [
+  { value: 3, label: 'Computer Science Engineering' },
+  { value: 1, label: 'Electronics and Communication Engineering' },
+  { value: 7, label: 'Mechanical Engineering' },
+  { value: 9, label: 'Civil Engineering' },
+  { value: 2, label: 'Electrical and Electronics Engineering' },
+  { value: 5, label: 'Biotechnology Engineering' },
+  { value: 4, label: 'Chemical Engineering' },
+  { value: 8, label: 'Maths and Computing' },
+  { value: 6, label: 'MME' },
+];
 
 const RegisterPage = () => {
   const backend_url = "http://127.0.0.1:8000/api";
@@ -11,6 +23,7 @@ const RegisterPage = () => {
     password: '',
     roll_number: '',
     branch: '',
+    course:'',
     cgpa: ''
   });
 
@@ -20,6 +33,12 @@ const RegisterPage = () => {
       [e.target.name]: e.target.value
     });
   };
+  const handleSelectChange = (selectedOptions) => {
+    setFormData({
+        ...formData,
+        branch: selectedOptions.value,
+    });
+};
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,7 +47,7 @@ const RegisterPage = () => {
     }
     else{
     try {
-      const response = await fetch(`${backend_url}/register/`, {
+      const response = await fetch(`${backend_url}/register/student/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -45,6 +64,55 @@ const RegisterPage = () => {
     }
   }
   };
+  const customStyles = {
+    control: (provided) => ({
+        ...provided,
+        width: '98%', // Match input width
+        marginBottom: '15px',
+        padding: '10px',
+        fontSize: '1em',
+        backgroundColor: 'rgba(255, 255, 255, 0.1)', // Background color
+        color: '#ebebeb', // Text color
+        border: 'none', // Remove border
+        borderRadius: '2px', // Optional: add border-radius
+        boxShadow:'none',
+        '&:hover': {
+            borderColor: 'none', // Change border color on hover
+        },
+    }),
+    multiValue: (provided) => ({
+        ...provided,
+        backgroundColor: '#2f2f2f', // Background for selected values
+    }),
+    multiValueLabel: (provided) => ({
+        ...provided,
+        color: '#ebebeb', // Color of selected value text
+    }),
+    multiValueRemove: (provided) => ({
+        ...provided,
+        color: '#ebebeb', // Color of remove icon
+        ':hover': {
+            backgroundColor: '#c82333', // Hover effect on remove icon
+            color: 'white', // Color when hovering
+        },
+    }),
+    menu: (provided) => ({
+        ...provided,
+        width: '98%', // Match dropdown width to input
+        backgroundColor: 'black', // Dropdown background
+        color: 'white', // Dropdown text color
+    }),
+    option: (provided, state) => ({
+        ...provided,
+        backgroundColor: state.isFocused ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.1)', // Change background on hover
+        color: '#ebebeb', // Option text color
+        cursor: 'pointer',
+        '&:active': {
+            backgroundColor: 'rgba(255, 255, 255, 0.3)', // Active background
+        },
+    }),
+};
+
 
   return (
     <div className={styles.loginContainer}>
@@ -115,12 +183,12 @@ const RegisterPage = () => {
             value={formData.course}
             onChange={handleChange}
           />
-          <input className={styles.login_form_input}
-            type="number"
-            name="branch"
+          <Select 
+            styles={customStyles}
+            options={branchOptions}
+            onChange={handleSelectChange}
+            value={branchOptions.find(option => option.value === formData.branch) || null}
             placeholder="Branch"
-            value={formData.branch}
-            onChange={handleChange}
           />
           <input className={styles.login_form_input}
             type="number"

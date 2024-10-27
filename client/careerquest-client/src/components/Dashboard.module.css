@@ -310,3 +310,47 @@
   font-size: 1.2em;
   color: #7f8c8d;
 }
+
+/* Dashboard.module.css */
+
+/* Container for each form field */
+.fieldContainer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+/* Styling for labels */
+label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+/* Styling for input and textarea fields */
+.textArea {
+  width: 100%;
+  font-size: 1em;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  min-height: 100px;
+}
+
+.backButton{
+  background-color: #0b6526;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.backButton:hover{
+  background-color: #163c21;
+}

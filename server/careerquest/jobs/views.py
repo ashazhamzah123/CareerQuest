@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, update_session_auth_hash
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 class EligibleJobsView(generics.ListAPIView):
@@ -34,6 +34,19 @@ class RegisterView(APIView):
     permission_classes = [AllowAny]
     def post(self, request):
         serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()
+            refresh = RefreshToken.for_user(user)
+            return Response({
+                'refresh': str(refresh),
+                'access': str(refresh.access_token),
+            }, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class StudentRegisterView(APIView):
+    permission_classes = [AllowAny]
+    def post(self, request):
+        serializer = RegisterSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
             refresh = RefreshToken.for_user(user)
@@ -95,10 +108,16 @@ class JobDeleteView(APIView):
 class UserProfileUpdateView(APIView):
     permission_classes = [IsAuthenticated]
 
-    def put(self, request):
-        serializer = UserProfileSerializer(request.user, data=request.data)
+    def patch(self, request):
+        user = request.user
+        data = request.data
+        serializer = UserProfileSerializer(user, data=request.data)
         if serializer.is_valid():
-            serializer.save()
+
+            if 'password' in data and data['password']:
+                user.set_password(data['password'])
+            user.save()
+            update_session_auth_hash(request, user)
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     

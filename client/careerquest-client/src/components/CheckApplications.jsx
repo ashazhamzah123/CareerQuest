@@ -114,7 +114,7 @@ const CheckApplications = () => {
                       <p>Rs {Appliedjob.job.salary/100000} LPA</p>
                       <button
                         className={styles['details-button']}
-                        onClick={() => (window.location.href = `/jobs/${job.id}`)} // Assuming job details have their own page
+                        onClick={() => (window.location.href = `/jobs/${Appliedjob.job.id}/details`)} // Assuming job details have their own page
                       >
                       View Details
                       </button>

@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 from rest_framework.authtoken import views as drf_views
-from .views import RegisterView, LoginView, JobCreateView, JobUpdateView, JobsListView, JobDetailView, JobDeleteView, UserProfileUpdateView, AppliedJobsView, JobApplicantsView, UserDetails,ApplyJobView, StudentDetails
+from .views import RegisterView, LoginView, JobCreateView, JobUpdateView, JobsListView, JobDetailView, JobDeleteView, UserProfileUpdateView, AppliedJobsView, JobApplicantsView, UserDetails,ApplyJobView, StudentDetails, StudentRegisterView
 from rest_framework_simplejwt.views import TokenRefreshView
 
 urlpatterns = [
@@ -9,6 +9,7 @@ urlpatterns = [
     path('jobs/<int:job_id>/apply/', views.ApplyJobView.as_view(), name='apply-job'),
 
     path('register/', RegisterView.as_view(), name='register'),
+    path('register/student/', StudentRegisterView.as_view(), name='register'),
     path('login/', LoginView.as_view(), name='login'),
     path('jobs/admin/', JobsListView.as_view(), name='jobs_list'),
     path('user-details/', UserDetails.as_view(), name='user_details'),

@@ -113,72 +113,55 @@ const Createjob = () => {
                 <section className={styles.EditContent}>
             <h1>Add Job</h1>
             <form onSubmit={handleSubmit}>
-            <input className={styles.input}
-            type="text"
-            name="title"
-            placeholder="Title"
-            value={formData.title}
-            onChange={handleChange}
-          />
-          <input className={styles.input}
-            type="text"
-            name="description"
-            placeholder="Description"
-            value={formData.description}
-            onChange={handleChange}
-          />
-          <input className={styles.input}
-            type="text"
-            name="company"
-            placeholder="Company"
-            value={formData.company}
-            onChange={handleChange}
-          />
-          <input className={styles.input}
-            type="text"
-            name="location"
-            placeholder="Location"
-            value={formData.location}
-            onChange={handleChange}
-          />
-          <input className={styles.input}
-            type="number"
-            name="min_cgpa"
-            placeholder="Min. CGPA"
-            value={formData.min_cgpa}
-            onChange={handleChange}
-          />
-          <input className={styles.input}
-            type="number"
-            name="salary"
-            placeholder="Salary"
-            value={formData.salary}
-            onChange={handleChange}
-          />
-          <input className={styles.input}
-            type="date"
-            name="due_date"
-            placeholder="Due Date"
-            value={formData.due_date}
-            onChange={handleChange}
-          />
-          <Select
-            isMulti
-            options={branchOptions}
-            onChange={handleSelectChange}
-            value={branchOptions.filter(option => formData.eligible_branches.includes(option.value))}
-            placeholder="Select eligible branches"
-          />
-          <button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-            className={styles['details-button']}  // Reuse login button styles
-          >
-            Create
-          </button>
-            </form>
+
+  <div className={styles.fieldContainer}>
+    <label>Title</label>
+    <input className={styles.input} type="text" name="title" placeholder="Title" value={formData.title} onChange={handleChange} />
+  </div>
+
+  <div className={styles.fieldContainer}>
+    <label>Description</label>
+    <textarea className={styles.textArea} name="description" placeholder="Description" value={formData.description} onChange={handleChange} rows={5} />
+  </div>
+
+  <div className={styles.fieldContainer}>
+    <label>Company</label>
+    <input className={styles.input} type="text" name="company" placeholder="Company" value={formData.company} onChange={handleChange} />
+  </div>
+
+  <div className={styles.fieldContainer}>
+    <label>Location</label>
+    <input className={styles.input} type="text" name="location" placeholder="Location" value={formData.location} onChange={handleChange} />
+  </div>
+
+  <div className={styles.fieldContainer}>
+    <label>Min. CGPA</label>
+    <input className={styles.input} type="number" name="min_cgpa" placeholder="Min. CGPA" value={formData.min_cgpa} onChange={handleChange} />
+  </div>
+
+  <div className={styles.fieldContainer}>
+    <label>Salary</label>
+    <input className={styles.input} type="number" name="salary" placeholder="Salary" value={formData.salary} onChange={handleChange} />
+  </div>
+
+  <div className={styles.fieldContainer}>
+    <label>Due Date</label>
+    <input className={styles.input} type="date" name="due_date" placeholder="Due Date" value={formData.due_date} onChange={handleChange} />
+  </div>
+
+  <div className={styles.fieldContainer}>
+    <label>Eligible Branches</label>
+    <Select
+      isMulti
+      options={branchOptions}
+      onChange={handleSelectChange}
+      value={branchOptions.filter(option => formData.eligible_branches.includes(option.value))}
+      placeholder="Select eligible branches"
+    />
+  </div>
+
+  <button type="submit" className={styles['details-button']}>create</button>
+</form>
           </section>
 
                 </div>

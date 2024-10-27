@@ -8,7 +8,7 @@ class BranchSerializer(serializers.ModelSerializer):
         fields = ['name']
 
 class UserSerializer(serializers.ModelSerializer):
-    branch = BranchSerializer(required=False)  # Make branch optional since admins don't need it
+    branch = serializers.PrimaryKeyRelatedField(queryset=Branch.objects.all())  # Make branch optional since admins don't need it
 
     class Meta:
         model = User
@@ -32,18 +32,20 @@ class UserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         # Extract branch data separately, if it exists
-        branch_data = validated_data.pop('branch', None)
+        branch = validated_data.pop('branch', None)
         
         # Create the user
         user = User.objects.create(**validated_data)
+        user.set_password(validated_data['password']) 
+        user.save()
 
         # If the user is a student and branch is provided, set the branch
-        if validated_data.get('is_student') and branch_data:
-            branch = Branch.objects.get(id=branch_data['id'])
+        if validated_data.get('is_student') and branch is not None:
             user.branch = branch
+            user.save()
         
-        user.set_password(validated_data['password'])  # Set password securely
-        user.save()
+         # Set password securely
+        
 
         return user
 
@@ -70,7 +72,7 @@ class ApplicationSerializer(serializers.ModelSerializer):
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('username', 'email', 'password', 'first_name','last_name','roll_number', 'branch','cgpa','is_student','is_admin')
+        fields = ('username', 'email', 'password', 'first_name','last_name','roll_number', 'course','branch','cgpa','is_student','is_admin')
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
@@ -78,6 +80,7 @@ class RegisterSerializer(serializers.ModelSerializer):
             first_name=validated_data['first_name'],
             username=validated_data['username'],
             email=validated_data['email'],
+            course = validated_data['course'],
             roll_number=validated_data['roll_number'],
             is_student=validated_data.get('is_student', True),
             is_admin=validated_data.get('is_admin', False)
@@ -133,7 +136,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     
 class UserProfileSerializer(serializers.ModelSerializer):
-    branch = BranchSerializer()
+    branch = serializers.PrimaryKeyRelatedField(queryset=Branch.objects.all())
 
     class Meta:
         model = User

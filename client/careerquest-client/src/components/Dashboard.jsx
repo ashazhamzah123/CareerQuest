@@ -195,7 +195,7 @@ const DashboardPage = () => {
                       <div style={{ display: 'flex', gap: '10px' }}>
                       <button
                         className={styles['details-button']}
-                        onClick={() => (window.location.href = `/jobs/${job.id}`)} // Assuming job details have their own page
+                        onClick={() => (window.location.href = `/jobs/${job.id}/details`)} // Assuming job details have their own page
                       >
                       View Details
                       </button>
