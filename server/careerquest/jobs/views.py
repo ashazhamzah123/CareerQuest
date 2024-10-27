@@ -111,9 +111,9 @@ class UserProfileUpdateView(APIView):
     def patch(self, request):
         user = request.user
         data = request.data
-        serializer = UserProfileSerializer(user, data=request.data)
+        serializer = UserProfileSerializer(user, data=request.data, partial = True)
         if serializer.is_valid():
-
+            serializer.save()
             if 'password' in data and data['password']:
                 user.set_password(data['password'])
             user.save()
@@ -138,6 +138,7 @@ class AdminProfileUpdateView(APIView):
         data = request.data
         serializer = UserSerializer(user, data=request.data, partial=True)
         if serializer.is_valid():
+            serializer.save()
             if 'password' in data and data['password']:
                 user.set_password(data['password'])
             user.save()
