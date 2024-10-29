@@ -108,7 +108,7 @@ const HomeStudent = () => {
         );
     }
     // Prepare data for PieChart
-    const pieData = Object.keys(statusCounts).map((status) => ({
+  const pieData = Object.keys(statusCounts).map((status) => ({
       name: status,
       value: statusCounts[status],
   }));
