@@ -189,6 +189,18 @@ const Jobedit = () => {
     <label>Min. CGPA</label>
     <input className={styles.input} type="number" name="min_cgpa" placeholder="Min. CGPA" value={jobData.min_cgpa} onChange={handleChange} />
   </div>
+  
+  <div className={styles.fieldContainer}>
+    <label>Eligible Branches</label>
+    <Select
+      isMulti
+      options={branchOptions}
+      onChange={handleSelectChange}
+      value={branchOptions.filter(option => jobData.eligible_branches.includes(option.value))}
+      placeholder="Select eligible branches"
+    />
+  </div>
+
 
   <div className={styles.fieldContainer}>
     <label>Salary</label>
@@ -204,16 +216,6 @@ const Jobedit = () => {
     <input className={styles.input} type="date" name="due_date" placeholder="Due Date" value={jobData.due_date} onChange={handleChange} />
   </div>
 
-  <div className={styles.fieldContainer}>
-    <label>Eligible Branches</label>
-    <Select
-      isMulti
-      options={branchOptions}
-      onChange={handleSelectChange}
-      value={branchOptions.filter(option => jobData.eligible_branches.includes(option.value))}
-      placeholder="Select eligible branches"
-    />
-  </div>
 
   <button type="submit" className={styles['details-button']}>Update</button>
 </form>
