@@ -141,6 +141,17 @@ const Createjob = () => {
   </div>
 
   <div className={styles.fieldContainer}>
+    <label>Eligible Branches</label>
+    <Select
+      isMulti
+      options={branchOptions}
+      onChange={handleSelectChange}
+      value={branchOptions.filter(option => formData.eligible_branches.includes(option.value))}
+      placeholder="Select eligible branches"
+    />
+  </div>
+
+  <div className={styles.fieldContainer}>
     <label>Salary</label>
     <input className={styles.input} type="number" name="salary" placeholder="Salary" value={formData.salary} onChange={handleChange} />
   </div>
@@ -152,17 +163,6 @@ const Createjob = () => {
   <div className={styles.fieldContainer}>
     <label>Due Date</label>
     <input className={styles.input} type="date" name="due_date" placeholder="Due Date" value={formData.due_date} onChange={handleChange} />
-  </div>
-
-  <div className={styles.fieldContainer}>
-    <label>Eligible Branches</label>
-    <Select
-      isMulti
-      options={branchOptions}
-      onChange={handleSelectChange}
-      value={branchOptions.filter(option => formData.eligible_branches.includes(option.value))}
-      placeholder="Select eligible branches"
-    />
   </div>
 
   <button type="submit" className={styles['details-button']}>create</button>
