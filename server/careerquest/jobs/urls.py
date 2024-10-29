@@ -1,13 +1,11 @@
 from django.urls import path
 from . import views
 from rest_framework.authtoken import views as drf_views
-from .views import RegisterView, LoginView, JobCreateView, JobUpdateView, JobsListView, JobDetailView, JobDeleteView, UserProfileUpdateView, AppliedJobsView, JobApplicantsView, AdminDetails, UserDetails,ApplyJobView, StudentDetails, StudentRegisterView, AdminProfileUpdateView
+from .views import RegisterView, LoginView, JobCreateView, JobUpdateView, JobsListView, JobDetailView, JobDeleteView, UserProfileUpdateView, AppliedJobsView, JobApplicantsView, AdminDetails, UserDetails,ApplyJobView, StudentDetails, StudentRegisterView, AdminProfileUpdateView, ApplicationStatusUpdateView, DashboardMessageView
 from rest_framework_simplejwt.views import TokenRefreshView
 
 urlpatterns = [
     path('jobs/', views.EligibleJobsView.as_view(), name='eligible-jobs'),
-    path('jobs/<int:job_id>/apply/', views.ApplyJobView.as_view(), name='apply-job'),
-
     path('register/', RegisterView.as_view(), name='register'),
     path('register/student/', StudentRegisterView.as_view(), name='register'),
     path('login/', LoginView.as_view(), name='login'),
@@ -24,5 +22,7 @@ urlpatterns = [
     path('jobs/applied/', AppliedJobsView.as_view(), name='applied_jobs'),
     path('jobs/<int:pk>/applicants/', JobApplicantsView.as_view(), name='job_applicants'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('jobs/<int:job_id>/apply/',ApplyJobView.as_view(), name='apply_job')
+    path('jobs/<int:job_id>/apply/',ApplyJobView.as_view(), name='apply_job'),
+    path('applications/<int:pk>/update-status/', ApplicationStatusUpdateView.as_view(), name='application-update-status'),
+    path('message/', DashboardMessageView.as_view(), name='dashboard-message')
 ]

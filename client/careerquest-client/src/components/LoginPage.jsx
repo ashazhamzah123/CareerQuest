@@ -35,7 +35,7 @@ const LoginPage = () => {
           if (userData.is_admin === true) {
             navigate('/adminProfile');
           } else {
-            navigate('/profile');
+            navigate('/dashboard');
           }
         } else {
           console.error("Failed to fetch user details.");

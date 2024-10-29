@@ -18,6 +18,8 @@ const branchOptions = [
 const RegisterPage = () => {
   const backend_url = "http://127.0.0.1:8000/api";
   const [formData, setFormData] = useState({
+    first_name:'',
+    last_name:'',
     username: '',
     email: '',
     password: '',
@@ -28,9 +30,10 @@ const RegisterPage = () => {
   });
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: name === "cgpa" ? parseFloat(value) || "" : value  // Ensures cgpa is a number or empty
     });
   };
   const handleSelectChange = (selectedOptions) => {
@@ -42,8 +45,11 @@ const RegisterPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formData.cgpa>10){
-      alert('CGPA can only be out of 10');
+    console.log(formData)
+    const cgpaValue = parseFloat(formData.cgpa);
+    if (isNaN(cgpaValue) || cgpaValue < 0 || cgpaValue > 10) {
+        alert('CGPA should be between 0 and 10');
+        return;
     }
     else{
     try {
@@ -56,8 +62,9 @@ const RegisterPage = () => {
       });
       if (response.ok) {
         alert('Registration successful!');
-      } else {
-        alert('Registration failed. Please try again.');
+      } else{
+      const errorData = await response.json();
+      alert(`Registration failed: ${errorData.detail || 'Please try again.'}`);
       }
     } catch (error) {
       console.error('Error during registration:', error);
@@ -72,7 +79,7 @@ const RegisterPage = () => {
         padding: '10px',
         fontSize: '1em',
         backgroundColor: 'rgba(255, 255, 255, 0.1)', // Background color
-        color: '#ebebeb', // Text color
+        color: 'white', // Text color
         border: 'none', // Remove border
         borderRadius: '2px', // Optional: add border-radius
         boxShadow:'none',
@@ -100,7 +107,7 @@ const RegisterPage = () => {
         ...provided,
         width: '98%', // Match dropdown width to input
         backgroundColor: 'black', // Dropdown background
-        color: 'white', // Dropdown text color
+        color: '#ebebeb', // Dropdown text color
     }),
     option: (provided, state) => ({
         ...provided,

@@ -159,6 +159,9 @@ const DashboardPage = () => {
         {/* Sidebar */}
         <aside className={styles.sidebar}>
           <ul>
+          <li className={location.pathname === '/dashboard' ? styles.active : ''}>
+              <Link to="/dashboard">Dashboard</Link>
+            </li>
             <li className={location.pathname === '/jobs' ? styles.active : ''}>
               <Link to="/jobs">Job Listing</Link>
             </li>

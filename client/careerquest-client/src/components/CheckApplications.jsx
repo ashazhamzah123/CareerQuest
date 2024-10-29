@@ -82,6 +82,9 @@ const CheckApplications = () => {
         {/* Sidebar */}
         <aside className={styles.sidebar}>
           <ul>
+          <li className={location.pathname === '/dashboard' ? styles.active : ''}>
+              <Link to="/dashboard">Dashboard</Link>
+            </li>
             <li className={location.pathname === '/jobs' ? styles.active : ''}>
               <Link to="/jobs">Job Listing</Link>
             </li>
@@ -109,6 +112,7 @@ const CheckApplications = () => {
                       <p>📅 {Appliedjob.job.due_date}</p>
                       <p>📍 {Appliedjob.job.location}</p>
                       <p>Rs {Appliedjob.job.salary/100000} LPA</p>
+                      <p>Status: {Appliedjob.status}</p>
                       <button
                         className={styles['details-button']}
                         onClick={() => (window.location.href = `/jobs/${Appliedjob.job.id}/details`)} // Assuming job details have their own page

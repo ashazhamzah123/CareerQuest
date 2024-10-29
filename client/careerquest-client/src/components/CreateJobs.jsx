@@ -28,6 +28,7 @@ const Createjob = () => {
         location: '',
         min_cgpa: '',
         salary: '',
+        OT_date: '',
         due_date: '',
         eligible_branches: ''
       });
@@ -142,6 +143,10 @@ const Createjob = () => {
   <div className={styles.fieldContainer}>
     <label>Salary</label>
     <input className={styles.input} type="number" name="salary" placeholder="Salary" value={formData.salary} onChange={handleChange} />
+  </div>
+  <div className={styles.fieldContainer}>
+    <label>OT Date (Optional)</label>
+    <input className={styles.input} type="date" name="OT_date" placeholder="OT Date" value={formData.OT_date} onChange={handleChange} />
   </div>
 
   <div className={styles.fieldContainer}>

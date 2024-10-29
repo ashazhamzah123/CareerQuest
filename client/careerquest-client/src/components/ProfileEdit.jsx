@@ -4,6 +4,7 @@ import Select from 'react-select';
 import styles from './dashboard.module.css';
 
 
+
 const branchOptions = [
     { value: 3, label: 'Computer Science Engineering' },
     { value: 1, label: 'Electronics and Communication Engineering' },
@@ -50,6 +51,7 @@ const ProfileEdit = () => {
                 navigate('/login');
                 return;
             }
+            else{
             try {
                 const response = await fetch(`${backend_url}/student-details/`, {
                     headers: {
@@ -72,6 +74,7 @@ const ProfileEdit = () => {
             } finally {
                 setLoading(false);
             }
+          }
         };
         fetchProfile();
     }, [navigate]);
@@ -95,6 +98,11 @@ const ProfileEdit = () => {
     // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (formData.cgpa < 0 || formData.cgpa > 10) {
+          alert('CGPA should be between 0 and 10');
+          return;
+      }
+      else{
         const token = localStorage.getItem('access_token');
         try {
             const response = await fetch(`${backend_url}/user/update/`, {
@@ -114,6 +122,7 @@ const ProfileEdit = () => {
         } catch (error) {
             setError(error.message);
         }
+      }
     };
 
     if (loading) return <div>Loading...</div>;
@@ -134,6 +143,9 @@ const ProfileEdit = () => {
         {/* Sidebar */}
         <aside className={styles.sidebar}>
           <ul>
+          <li className={location.pathname === '/dashboard' ? styles.active : ''}>
+              <Link to="/dashboard">Dashboard</Link>
+            </li>
             <li className={location.pathname === '/jobs' ? styles.active : ''}>
               <Link to="/jobs">Job Listing</Link>
             </li>

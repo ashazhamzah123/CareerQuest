@@ -12,7 +12,9 @@ const Homepage = () => {
           <nav className={styles.navbar}>
             <div className={styles.navbarLeft}>
               {/*<img src="/path-to-your-logo" alt="logo" className={styles.navbarLogo} />*/}
-              <h1 className={styles.navbarTitle}>CareerQuest</h1>
+              <div className={styles.navbarTitle}>
+                  <h3>CareerQuest</h3>
+                </div>
             </div>
           </nav>
       <div className={styles.textdiv}>

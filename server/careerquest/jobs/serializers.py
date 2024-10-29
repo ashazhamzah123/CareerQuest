@@ -52,7 +52,7 @@ class JobListingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = JobListing
-        fields = ['id','title', 'description', 'company', 'location','min_cgpa', 'eligible_branches', 'salary', 'due_date', 'post_date']
+        fields = ['id','title', 'description', 'company', 'location','min_cgpa', 'eligible_branches', 'salary','OT_date', 'due_date', 'post_date']
 
 class ApplicationSerializer(serializers.ModelSerializer):
     student = UserSerializer()
@@ -100,3 +100,8 @@ class AdminProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['username', 'email', 'first_name', 'last_name']
+
+class ApplicationStatusUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Application
+        fields = ['status']

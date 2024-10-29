@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import styles from './Dashboard.module.css'; // Import CSS module
+import Select from 'react-select';
 
 const branchOptions = [
   { value: 3, label: 'Computer Science Engineering' },
@@ -12,6 +13,14 @@ const branchOptions = [
   { value: 4, label: 'Chemical Engineering' },
   { value: 8, label: 'Maths and Computing' },
   { value: 6, label: 'MME' },
+];
+
+const statusOptions = [
+  { value: 'Pending', label: 'Pending' },
+  { value: 'Shortlisted', label: 'Shortlisted' },
+  { value: 'Selected', label: 'Selected' },
+  { value: 'Rejected', label: 'Rejected' },
+  { value: 'On hold', label: 'On hold' },
 ];
 
 const Jobapplicants = () => {
@@ -31,6 +40,38 @@ const Jobapplicants = () => {
     const getBranchName = (branchId) => {
       const branch = branchOptions.find(option => option.value === branchId);
       return branch ? branch.label : "Unknown Branch";
+    };
+
+    const handleStatusChange = async (newStatus, applicationId) => {
+      try {
+        const response = await fetch(`${backend_url}/applications/${applicationId}/update-status/`, {
+          method: 'PATCH',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ status: newStatus.value }),
+        });
+        if (response.status === 401) {
+          alert('Session timed out. Please log in again.'); // Popup alert
+          localStorage.removeItem('access_token');
+          localStorage.removeItem('refresh_token');
+
+          window.location.href = '/login';
+          return; 
+        }
+        if (response.ok) {
+          setApplicants((prevApplicants) =>
+            prevApplicants.map((applicant) =>
+              applicant.application_id === applicationId ? { ...applicant, status: newStatus.value } : applicant
+            )
+          );
+        } else {
+          console.error('Failed to update status');
+        }
+      } catch (error) {
+        console.error('Error updating status:', error);
+      }
     };
 
   useEffect(() => {
@@ -138,6 +179,14 @@ const Jobapplicants = () => {
               </div>
               <div className={styles.applicantDetails}>
                 <span className={styles.detailLabel}>CGPA:</span> {applicant.cgpa}
+              </div>
+              <div className={styles.applicantDetails}>
+                <span className={styles.detailLabel}>Status:</span>
+              <Select
+              value={statusOptions.find(option => option.value === applicant.status)}
+              onChange={(selectedOption) => handleStatusChange(selectedOption, applicant.application_id)}
+              options={statusOptions}
+              />
               </div>
             </div>
           ))}

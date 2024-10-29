@@ -77,10 +77,12 @@ const Jobedit = () => {
                 description: data.description,
                 company: data.company,
                 min_cgpa: data.min_cgpa,
+                OT_date: data.OT_date,
                 due_date: data.due_date,
                 eligible_branches: eligibleBranchIds ,
                 location: data.location,
                 salary: data.salary,
+
               });
             } 
             else {
@@ -191,6 +193,10 @@ const Jobedit = () => {
   <div className={styles.fieldContainer}>
     <label>Salary</label>
     <input className={styles.input} type="number" name="salary" placeholder="Salary" value={jobData.salary} onChange={handleChange} />
+  </div>
+  <div className={styles.fieldContainer}>
+    <label>OT Date</label>
+    <input className={styles.input} type="date" name="OT_date" placeholder="OT Date" value={jobData.OT_date} onChange={handleChange} />
   </div>
 
   <div className={styles.fieldContainer}>
