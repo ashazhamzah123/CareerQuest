@@ -22,7 +22,7 @@ const Homepage = () => {
         
       <div className={styles.homeTextCard}>
       <h1>Welcome to CareerQuest</h1>
-      <div className={styles.description}>CareerQuest is your dedicated platform for discovering on-campus job opportunities tailored to your qualifications and interests. Designed with students and administrators in mind, CareerQuest simplifies the placement process, helping students find roles that match their academic achievements and career aspirations.</div>
+      <div className={styles.description}>CareerQuest is your dedicated platform for discovering on-campus job opportunities tailored to your qualifications and interests. Designed with students and administrators of NIT Warangal in mind, CareerQuest simplifies the placement process, helping students find roles that match their academic achievements and career aspirations.</div>
       </div>
       <div className={styles.row}>
       <div className={styles['text-section']}>
