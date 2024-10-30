@@ -3,6 +3,18 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styles from './Dashboard.module.css'; // Import CSS module
 import { Card, CardContent, Typography, Button, Avatar, Grid2 } from '@mui/material';
 
+const branchOptions = [
+  { value: 3, label: 'Computer Science Engineering' },
+  { value: 1, label: 'Electronics and Communication Engineering' },
+  { value: 7, label: 'Mechanical Engineering' },
+  { value: 9, label: 'Civil Engineering' },
+  { value: 2, label: 'Electrical and Electronics Engineering' },
+  { value: 5, label: 'Biotechnology Engineering' },
+  { value: 4, label: 'Chemical Engineering' },
+  { value: 8, label: 'Maths and Computing' },
+  { value: 6, label: 'MME' },
+];
+
 const Managejobs = () => {
     const backend_url = "http://127.0.0.1:8000/api";
     const location = useLocation();
@@ -110,7 +122,6 @@ const Managejobs = () => {
                     </ul>
                 </aside>
                 <section className={styles.dashboardContent}>
-                <div className={styles.dashboardContainer}>
                 <h2>Jobs</h2>
                 <div className={styles['job-list']}>
                     {jobs.map((job) => (
@@ -119,6 +130,14 @@ const Managejobs = () => {
                       <p className={styles['company-name']}>- {job.company}</p>
                       <p>📅 {job.due_date}</p>
                       <p>📍 {job.location}</p>
+                      <p>Min. CGPA: {job.min_cgpa}</p>
+                      <strong>Eligible Branches:</strong>
+                          <ul>
+                              {job.eligible_branches.map(branchId => {
+                                  const branch = branchOptions.find(option => option.value === branchId);
+                                  return <li key={branchId}>{branch ? branch.label : 'Unknown Branch'}</li>;
+                              })}
+                          </ul>
                       <div style={{ display: 'flex', gap: '10px' }}>
                       <button
                         className={styles['details-button']}
@@ -141,7 +160,6 @@ const Managejobs = () => {
                       </div>
                       </div>
                     ))}
-                </div>
             </div>
             </section>
             </div>

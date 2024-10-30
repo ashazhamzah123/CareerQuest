@@ -152,10 +152,6 @@ const Createjob = () => {
   </div>
 
   <div className={styles.fieldContainer}>
-    <label>Salary</label>
-    <input className={styles.input} type="number" name="salary" placeholder="Salary" value={formData.salary} onChange={handleChange} />
-  </div>
-  <div className={styles.fieldContainer}>
     <label>OT Date (Optional)</label>
     <input className={styles.input} type="date" name="OT_date" placeholder="OT Date" value={formData.OT_date} onChange={handleChange} />
   </div>
@@ -164,6 +160,12 @@ const Createjob = () => {
     <label>Due Date</label>
     <input className={styles.input} type="date" name="due_date" placeholder="Due Date" value={formData.due_date} onChange={handleChange} />
   </div>
+
+  <div className={styles.fieldContainer}>
+    <label>Salary</label>
+    <input className={styles.input} type="number" name="salary" placeholder="Salary" value={formData.salary} onChange={handleChange} />
+  </div>
+
 
   <button type="submit" className={styles['details-button']}>create</button>
 </form>

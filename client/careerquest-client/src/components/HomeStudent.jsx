@@ -48,6 +48,7 @@ const HomeStudent = () => {
 
               setMessages(data.messages || []);
               setStatusCounts(data.status_counts||[])
+              console.log(statusCounts);
           } catch (err) {
               setError("An error occurred while fetching applications.");
           } finally {
